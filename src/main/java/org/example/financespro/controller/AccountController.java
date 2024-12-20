@@ -34,7 +34,7 @@ public class AccountController {
   public Mono<ResponseEntity<AccountResponseDto>> getAccount(@PathVariable String accountNumber) {
     return financeFacade
         .getAccountDetails(accountNumber)
-        .map(account -> ResponseEntity.ok(account))
+        .map(ResponseEntity::ok)
         .defaultIfEmpty(ResponseEntity.notFound().build());
   }
 }

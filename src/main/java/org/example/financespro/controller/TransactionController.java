@@ -26,7 +26,7 @@ public class TransactionController {
       @Valid @RequestBody TransactionRequestDto request) { // Valida solo este parámetro
     return financeFacade
         .processTransaction(request)
-        .map(transaction -> ResponseEntity.ok(transaction))
+        .map(ResponseEntity::ok)
         .onErrorResume(e -> Mono.just(ResponseEntity.status(HttpStatus.BAD_REQUEST).build()));
   }
 }
