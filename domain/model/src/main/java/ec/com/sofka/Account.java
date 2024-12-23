@@ -9,7 +9,8 @@ public class Account {
     private String accountNumber;
     private String owner;
 
-    public Account(BigDecimal balance, String owner, String accountNumber) {
+    public Account(String id, BigDecimal balance, String owner, String accountNumber) {
+        this.id = id;
         this.balance = balance;
         this.owner = owner;
         this.accountNumber = accountNumber;

@@ -1,8 +1,6 @@
 dependencies {
-
-    implementation project (':usecases')
-    implementation project (':mongo-repository')
-    implementation project(':web')
+    implementation project(':usecases')
+    implementation project(':model')
 
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
