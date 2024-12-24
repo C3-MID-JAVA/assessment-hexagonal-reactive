@@ -1,24 +1,14 @@
-package ec.com.sofka.data;
-
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+package ec.com.sofka.dto;
 
 import java.math.BigDecimal;
 
-@Document(collection = "accounts")
-public class AccountEntity {
-
-    @Id
+public class AccountResponseDTO {
     private String id;
-
     private String accountNumber;
-
     private BigDecimal balance;
-
     private String userId;
 
-    public AccountEntity(String id, String accountNumber, BigDecimal balance, String userId) {
+    public AccountResponseDTO(String id, String accountNumber, BigDecimal balance, String userId) {
         this.id = id;
         this.accountNumber = accountNumber;
         this.balance = balance;
