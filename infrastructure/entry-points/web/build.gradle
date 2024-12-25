@@ -2,12 +2,15 @@ dependencies {
     implementation project(':usecases')
     implementation project(':model')
     implementation project(":mongo-repository")
+    implementation project(':exception')
 
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '3.1.0'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
+    implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.7.0'
 
 }
