@@ -8,4 +8,5 @@ public interface UserRepository {
     Mono<User> create(User user);
     Flux<User> getAll();
     Mono<User> findByDocumentId(String documentId);
+    Mono<User> findById(String id);
 }

@@ -33,4 +33,9 @@ public class UserMongoAdapter implements UserRepository {
     public Mono<User> findByDocumentId(String documentId) {
         return repository.findByDocumentId(documentId).map(UserMapperEntity::fromEntity);
     }
+
+    @Override
+    public Mono<User> findById(String id) {
+        return repository.findById(id).map(UserMapperEntity::fromEntity);
+    }
 }

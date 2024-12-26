@@ -32,4 +32,9 @@ public class AccountMongoAdapter implements AccountRepository {
     public Mono<Account> findByAccountNumber(String accountNumber) {
         return repository.findByAccountNumber(accountNumber).map(AccountMapperEntity::fromEntity);
     }
+
+    @Override
+    public Mono<Account> findById(String id) {
+        return repository.findById(id).map(AccountMapperEntity::fromEntity);
+    }
 }

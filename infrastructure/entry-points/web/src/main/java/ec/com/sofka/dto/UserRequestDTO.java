@@ -13,6 +13,9 @@ public class UserRequestDTO {
     @Size(min = 3, max = 15)
     private String documentId;
 
+    public UserRequestDTO() {
+    }
+
     public UserRequestDTO(String name, String documentId) {
         this.name = name;
         this.documentId = documentId;

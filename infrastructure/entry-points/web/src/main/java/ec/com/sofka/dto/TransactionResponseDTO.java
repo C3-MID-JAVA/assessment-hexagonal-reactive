@@ -2,17 +2,18 @@ package ec.com.sofka.dto;
 
 import ec.com.sofka.TransactionType;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 
 public class TransactionResponseDTO {
     private String id;
-    private double fee;
-    private double netAmount;
+    private BigDecimal fee;
+    private BigDecimal netAmount;
     private TransactionType type;
     private LocalDateTime timestamp;
 
-    public TransactionResponseDTO(String id, double fee, double netAmount, TransactionType type, LocalDateTime timestamp) {
+    public TransactionResponseDTO(String id, BigDecimal fee, BigDecimal netAmount, TransactionType type, LocalDateTime timestamp) {
         this.id = id;
         this.fee = fee;
         this.netAmount = netAmount;
@@ -28,19 +29,19 @@ public class TransactionResponseDTO {
         this.id = id;
     }
 
-    public double getFee() {
+    public BigDecimal getFee() {
         return fee;
     }
 
-    public void setFee(double fee) {
+    public void setFee(BigDecimal fee) {
         this.fee = fee;
     }
 
-    public double getNetAmount() {
+    public BigDecimal getNetAmount() {
         return netAmount;
     }
 
-    public void setNetAmount(double netAmount) {
+    public void setNetAmount(BigDecimal netAmount) {
         this.netAmount = netAmount;
     }
 

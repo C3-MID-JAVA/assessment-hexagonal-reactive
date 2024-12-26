@@ -4,6 +4,7 @@ import ec.com.sofka.TransactionType;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 
@@ -13,11 +14,11 @@ public class TransactionEntity {
     @Id
     private String id;
 
-    private double amount;
+    private BigDecimal amount;
 
-    private double fee;
+    private BigDecimal fee;
 
-    private double netAmount;
+    private BigDecimal netAmount;
 
     private TransactionType type;
 
@@ -25,7 +26,7 @@ public class TransactionEntity {
 
     private String accountId;
 
-    public TransactionEntity(String id, double amount, double fee, double netAmount, TransactionType type, LocalDateTime timestamp, String accountId) {
+    public TransactionEntity(String id, BigDecimal amount, BigDecimal fee, BigDecimal netAmount, TransactionType type, LocalDateTime timestamp, String accountId) {
         this.id = id;
         this.amount = amount;
         this.fee = fee;
@@ -43,27 +44,27 @@ public class TransactionEntity {
         this.id = id;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
-    public double getFee() {
+    public BigDecimal getFee() {
         return fee;
     }
 
-    public void setFee(double fee) {
+    public void setFee(BigDecimal fee) {
         this.fee = fee;
     }
 
-    public double getNetAmount() {
+    public BigDecimal getNetAmount() {
         return netAmount;
     }
 
-    public void setNetAmount(double netAmount) {
+    public void setNetAmount(BigDecimal netAmount) {
         this.netAmount = netAmount;
     }
 

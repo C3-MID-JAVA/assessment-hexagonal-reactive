@@ -7,6 +7,9 @@ public class User {
 
     private String documentId;
 
+    public User() {
+    }
+
     public User(String name, String documentId) {
         this.name = name;
         this.documentId = documentId;

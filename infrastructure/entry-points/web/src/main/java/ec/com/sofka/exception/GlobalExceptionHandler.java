@@ -47,9 +47,7 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
         ServerHttpResponse response = exchange.getResponse();
 
         HttpStatus status = statusResolver.apply(ex);
-        String errorMessage =
-                status == HttpStatus.INTERNAL_SERVER_ERROR ?
-                        "INTERNAL SERVER ERROR" : ex.getMessage();
+        String errorMessage = ex.getMessage();
 
         ErrorResponse errorResponse = new ErrorResponse(status, errorMessage);
 

@@ -8,4 +8,5 @@ public interface AccountRepository {
     Mono<Account> create(Account account);
     Flux<Account> getAllByUserId(String userId);
     Mono<Account> findByAccountNumber(String accountNumber);
+    Mono<Account> findById(String id);
 }

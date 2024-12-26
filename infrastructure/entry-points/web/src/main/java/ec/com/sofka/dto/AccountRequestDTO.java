@@ -7,6 +7,9 @@ public class AccountRequestDTO {
     @NotBlank(message = "UserId cannot be blank")
     private String userId;
 
+    public AccountRequestDTO() {
+    }
+
     public AccountRequestDTO(String userId) {
         this.userId = userId;
     }
