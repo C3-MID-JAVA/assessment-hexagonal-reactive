@@ -39,7 +39,7 @@ public class TransactionUseCase {
                     BigDecimal saldoFinal = calculateFinalBalance(cuenta.getBalance(), transaction.getAmount(), costoTransaccion, tipoOperacion);
 
                     if (isSaldoInsuficiente.test(saldoFinal)) {
-                        return Mono.error(new ConflictException("Saldo insuficiente para realizar la operación."));
+                        return Mono.error(new ConflictException("Insufficient balance for transaction."));
                     }
 
                     cuenta.setBalance(saldoFinal);
@@ -69,12 +69,6 @@ public class TransactionUseCase {
                     Transaction transaccion = new Transaction(null,monto, costo, LocalDateTime.now(), tipoTransaccion, cuentaGuardada.getId());
                     return transactionRepository.save(transaccion);
                 });
-    }
-
-    public Mono<BigDecimal> consultarSaldo(String id) {
-        return accountRepository.findById(id)
-                .switchIfEmpty(Mono.error(new NoSuchElementException("No se encontro el cuenta con id: " + id)))
-                .map(Account::getBalance);
     }
 
 }

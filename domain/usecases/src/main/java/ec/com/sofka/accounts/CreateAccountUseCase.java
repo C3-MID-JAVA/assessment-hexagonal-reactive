@@ -15,6 +15,6 @@ public class CreateAccountUseCase {
     public Mono<Account> apply(Account account) {
         return repository.findByAccountNumber(account.getAccountNumber())
                 .flatMap(cuenta -> Mono.<Account>error(new ConflictException("The account number is already registered.")))
-                .switchIfEmpty(repository.save(account));
+                .switchIfEmpty(Mono.defer(() -> repository.save(account)));
     }
 }

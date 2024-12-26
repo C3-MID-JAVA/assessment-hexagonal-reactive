@@ -10,4 +10,5 @@ public interface TransaccionStrategy {
     void validate(Account account, BigDecimal amount) throws ConflictException;
 
     BigDecimal getAmount();
+
 }
