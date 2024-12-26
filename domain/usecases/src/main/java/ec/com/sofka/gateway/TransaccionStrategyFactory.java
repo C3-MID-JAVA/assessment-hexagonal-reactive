@@ -1,4 +1,4 @@
-package ec.com.sofka.factory;
+package ec.com.sofka.gateway;
 
 import ec.com.sofka.ConflictException;
 import ec.com.sofka.enums.OperationType;
@@ -8,8 +8,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.EnumMap;
 import java.util.Map;
+
 @Component
 public class TransaccionStrategyFactory {
+
     private final Map<TransactionType, TransaccionStrategy> strategies = new EnumMap<>(TransactionType.class);
 
     public TransaccionStrategyFactory() {

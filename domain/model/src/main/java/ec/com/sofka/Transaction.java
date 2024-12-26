@@ -28,6 +28,14 @@ public class Transaction {
         this.accountId = accountId;
     }
 
+    public Transaction(BigDecimal amount, BigDecimal transactionCost, LocalDateTime date, TransactionType type, String accountId) {
+        this.amount = amount;
+        this.transactionCost = transactionCost;
+        this.date = date;
+        this.type = type;
+        this.accountId = accountId;
+    }
+
     public String getId() {
         return id;
     }

@@ -7,7 +7,8 @@ import reactor.core.publisher.Mono;
 
 public interface ITransactionRepository {
     Flux<Transaction> findAll();
-    Mono<Transaction> save(Account cuenta);
-    Mono<Transaction> findByAccountNumber(String id);
+    Mono<Transaction> save(Transaction transaction);
     Mono<Transaction> findById(String id);
+    Mono<Transaction> findByAccountNumber(String accountNumber);
+
 }

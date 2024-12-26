@@ -21,25 +21,25 @@ public class AccountAdapter implements IAccountRepository {
     @Override
     public Mono<Account> findByAccountNumber(String accountNumber) {
         return repository.findByAccountNumber(accountNumber)
-                .map(AccountMapper::toAccount
+                .map(AccountMapper::accountEntityToAccount
                 );
     }
 
     @Override
     public Mono<Account> save(Account account) {
-        return repository.save(AccountMapper.toAccountEntity(account)).map(AccountMapper::toAccount);
+        return repository.save(AccountMapper.accountToAccountEntity(account)).map(AccountMapper::accountEntityToAccount);
     }
 
     @Override
     public Flux<Account> findAll() {
-        return repository.findAll().map(AccountMapper::toAccount);
+        return repository.findAll().map(AccountMapper::accountEntityToAccount);
     }
 
     @Override
     public Mono<Account> findById(String id) {
-        return repository.findById(id).map(AccountMapper::toAccount);
+        return repository.findById(id).map(AccountMapper::accountEntityToAccount);
     }
-
+/*
     @Override
     public Mono<BigDecimal> getCheckBalance(String id) {
         return repository.findById(id)
@@ -49,5 +49,5 @@ public class AccountAdapter implements IAccountRepository {
                     }
                     return Mono.just(account.getBalance());
                 });
-    }
+    }*/
 }

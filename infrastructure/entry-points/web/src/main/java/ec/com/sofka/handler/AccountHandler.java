@@ -1,18 +1,14 @@
-package ec.com.sofka.handler.account;
+package ec.com.sofka.handler;
 
 import ec.com.sofka.accounts.*;
 import ec.com.sofka.data.AccountRequestDTO;
 import ec.com.sofka.data.AccountResponseDTO;
 import ec.com.sofka.mapper.AccountDTOMapper;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.math.BigDecimal;
-import java.util.NoSuchElementException;
 
 @Component
 public class AccountHandler {

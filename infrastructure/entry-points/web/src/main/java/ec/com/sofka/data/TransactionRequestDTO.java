@@ -23,7 +23,7 @@ public class TransactionRequestDTO {
     private BigDecimal amount;
 
     @NotNull
-    @Schema(description = "The type of the transaction (e.g., deposit, withdrawal)", example = "DEPOSIT")
+    @Schema(description = "The type of the transaction (e.g., deposit, withdrawal)", example = "BRANCH_DEPOSIT")
     private TransactionType transactionType;
 
     public TransactionRequestDTO(String accountNumber, BigDecimal amount, TransactionType transactionType) {

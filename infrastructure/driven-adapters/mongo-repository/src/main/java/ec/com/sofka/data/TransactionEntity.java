@@ -38,14 +38,6 @@ public class TransactionEntity {
         this.accountId = accountId;
     }
 
-    public TransactionEntity(BigDecimal amount, BigDecimal transactionCost, LocalDateTime date, TransactionType type, String accountId) {
-        this.amount = amount;
-        this.transactionCost = transactionCost;
-        this.date = date;
-        this.type = type;
-        this.accountId = accountId;
-    }
-
     public String getId() {
         return id;
     }

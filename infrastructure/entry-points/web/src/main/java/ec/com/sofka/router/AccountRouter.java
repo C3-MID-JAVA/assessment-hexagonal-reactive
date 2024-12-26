@@ -4,7 +4,7 @@ import ec.com.sofka.ErrorResponse;
 import ec.com.sofka.data.AccountRequestDTO;
 import ec.com.sofka.data.AccountResponseDTO;
 import ec.com.sofka.globalexceptions.GlobalErrorHandler;
-import ec.com.sofka.handler.account.AccountHandler;
+import ec.com.sofka.handler.AccountHandler;
 import ec.com.sofka.service.ValidationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
