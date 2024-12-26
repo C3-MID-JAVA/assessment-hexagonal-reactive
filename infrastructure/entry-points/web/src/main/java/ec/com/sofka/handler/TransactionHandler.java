@@ -20,7 +20,6 @@ import java.math.BigDecimal;
 public class TransactionHandler {
     private final CreateDepositUseCase createDepositUseCase;
     private final CreateWithDrawalUseCase createWithDrawalUseCase;
-    private final GetTransactionByAccountNumberUseCase getTransactionByAccountNumberUseCase;
     private final GetTransactionsUseCase getTransactionsUseCase;
     private final GetTransactionByIdUseCase getTransactionByIdUseCase;
     private final TransactionDTOMapper transactionMapper;
@@ -30,7 +29,7 @@ public class TransactionHandler {
 
     public TransactionHandler(CreateDepositUseCase createDepositUseCase,
                               TransactionDTOMapper transactionMapper,GetAccountByIdUseCase getAccountByIdUseCase,
-                              CreateWithDrawalUseCase createWithDrawalUseCase, GetTransactionByAccountNumberUseCase getTransactionByAccountNumberUseCase,
+                              CreateWithDrawalUseCase createWithDrawalUseCase,
                               GetTransactionsUseCase getTransactionsUseCase,
                               GetTransactionByIdUseCase getTransactionByIdUseCase,
                               GetAccountByAccountNumberUseCase getAccountByAccountNumberUseCase) {
@@ -38,7 +37,6 @@ public class TransactionHandler {
         this.transactionMapper = transactionMapper;
         this.getAccountByIdUseCase = getAccountByIdUseCase;
         this.createWithDrawalUseCase = createWithDrawalUseCase;
-        this.getTransactionByAccountNumberUseCase = getTransactionByAccountNumberUseCase;
         this.getTransactionsUseCase = getTransactionsUseCase;
         this.getTransactionByIdUseCase = getTransactionByIdUseCase;
         this.getAccountByAccountNumberUseCase = getAccountByAccountNumberUseCase;
@@ -64,17 +62,6 @@ public class TransactionHandler {
                 });
     }
 
-    public Mono<TransactionResponseDTO> getTransactionByAccountNumber(String accountNumber) {
-        return getTransactionByAccountNumberUseCase.apply(accountNumber)
-                .flatMap(transaction -> {
-                    return getAccountByAccountNumberUseCase.apply(accountNumber)
-                            .map(account -> {
-                                return new TransactionResponseDTO(transaction, account.getBalance(), account.getAccountNumber());
-                            })
-                            .switchIfEmpty(Mono.just(new TransactionResponseDTO(transaction, BigDecimal.ZERO, "Cuenta desconocida")));
-                });
-    }
-
 
     public Mono<TransactionResponseDTO> getTransactionById(String id) {
         return getTransactionByIdUseCase.apply(id)
@@ -96,7 +83,6 @@ public class TransactionHandler {
                                 .switchIfEmpty(Mono.just(new TransactionResponseDTO(transaction, BigDecimal.ZERO, "Cuenta desconocida")))
                 );
     }
-
 
 
 }

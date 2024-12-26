@@ -33,11 +33,4 @@ public class TransactionDTOMapper {
         );
     }
 
-    public static AccountResponseDTO accountToAccountResponseDTO(Account account) {
-        return new AccountResponseDTO(account.getId(),account.getAccountNumber(),
-                account.getBalance(),account.getOwner()
-        );
-    }
-
-
 }

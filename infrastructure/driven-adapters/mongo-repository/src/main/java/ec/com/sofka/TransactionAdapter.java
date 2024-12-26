@@ -32,9 +32,4 @@ public class TransactionAdapter implements ITransactionRepository {
         return repository.findById(id).map(TransactionMapper::transactionEntityToTransaction);
     }
 
-    @Override
-    public Mono<Transaction> findByAccountNumber(String accountNumber) {
-        return repository.findByAccountNumber(accountNumber)
-                .map(TransactionMapper::transactionEntityToTransaction);
-    }
 }

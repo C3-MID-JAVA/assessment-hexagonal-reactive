@@ -28,7 +28,7 @@ public class TransactionResponseDTO {
         this.transactionCost = transaction.getTransactionCost();
         this.date = transaction.getDate();
         this.newBalance = balance;
-        this.accountNumber = accountNumber; // Aquí es donde asignamos el accountNumber correcto
+        this.accountNumber = accountNumber;
     }
 
     public TransactionResponseDTO(String id, String accountNumber, TransactionType transactionType, BigDecimal amount, BigDecimal transactionCost, BigDecimal newBalance, LocalDateTime date) {
