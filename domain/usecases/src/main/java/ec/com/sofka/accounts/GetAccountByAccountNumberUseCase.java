@@ -4,6 +4,8 @@ import ec.com.sofka.Account;
 import ec.com.sofka.accounts.gateway.IAccountRepository;
 import reactor.core.publisher.Mono;
 
+import java.util.NoSuchElementException;
+
 public class GetAccountByAccountNumberUseCase {
 
     private final IAccountRepository repository;
@@ -13,6 +15,6 @@ public class GetAccountByAccountNumberUseCase {
     }
 
     public Mono<Account> apply(String accountNumber) {
-        return repository.findByAccountNumber(accountNumber).switchIfEmpty(Mono.empty());
+        return repository.findByAccountNumber(accountNumber).switchIfEmpty(Mono.error(new NoSuchElementException("The account with the provided ID does not exist")));
     }
 }
