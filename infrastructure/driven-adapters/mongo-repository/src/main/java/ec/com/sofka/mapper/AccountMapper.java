@@ -7,7 +7,7 @@ public class AccountMapper {
 
     public static Account toAccount(AccountEntity accountEntity) {
         return new Account(
-                accountEntity.getId(),accountEntity.getBalance(),accountEntity.getOwner(),accountEntity.getAccountNumber()
+                accountEntity.getId(),accountEntity.getBalance(),accountEntity.getAccountNumber(),accountEntity.getOwner()
         );
     }
 

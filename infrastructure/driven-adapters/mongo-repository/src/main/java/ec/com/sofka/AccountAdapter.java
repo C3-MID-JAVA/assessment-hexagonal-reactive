@@ -1,14 +1,13 @@
 package ec.com.sofka;
 
-import ec.com.sofka.accounts.gateway.IAccountRepository;
+import ec.com.sofka.gateway.IAccountRepository;
 import ec.com.sofka.config.IMongoAccountRepository;
-import ec.com.sofka.data.AccountEntity;
 import ec.com.sofka.mapper.AccountMapper;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.NoSuchElementException;
+import java.math.BigDecimal;
 
 @Repository
 public class AccountAdapter implements IAccountRepository {
@@ -39,5 +38,16 @@ public class AccountAdapter implements IAccountRepository {
     @Override
     public Mono<Account> findById(String id) {
         return repository.findById(id).map(AccountMapper::toAccount);
+    }
+
+    @Override
+    public Mono<BigDecimal> getCheckBalance(String id) {
+        return repository.findById(id)
+                .flatMap(account -> {
+                    if (account.getBalance() == null) {
+                        return Mono.error(new RuntimeException("Balance is null for account ID: " + id));
+                    }
+                    return Mono.just(account.getBalance());
+                });
     }
 }

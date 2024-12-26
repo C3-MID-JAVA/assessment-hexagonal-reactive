@@ -12,7 +12,7 @@ public class Account {
     private String owner;
     private List<Transaction> transactions= new ArrayList<>();
 
-    public Account(String id, BigDecimal balance, String owner, String accountNumber) {
+    public Account(String id, BigDecimal balance, String accountNumber,String owner) {
         this.id = id;
         this.balance = balance;
         this.owner = owner;
@@ -24,6 +24,7 @@ public class Account {
         this.accountNumber = accountNumber;
         this.owner = owner;
     }
+
 
     public String getId() {
         return id;

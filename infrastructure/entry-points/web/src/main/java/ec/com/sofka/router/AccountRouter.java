@@ -3,7 +3,6 @@ package ec.com.sofka.router;
 import ec.com.sofka.ErrorResponse;
 import ec.com.sofka.data.AccountRequestDTO;
 import ec.com.sofka.data.AccountResponseDTO;
-import ec.com.sofka.data.RequestByPOST;
 import ec.com.sofka.globalexceptions.GlobalErrorHandler;
 import ec.com.sofka.handler.account.AccountHandler;
 import ec.com.sofka.service.ValidationService;
@@ -22,6 +21,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.server.*;
 import reactor.core.publisher.Mono;
+
+import java.math.BigDecimal;
+
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 
 @Configuration
@@ -64,11 +66,6 @@ public class AccountRouter {
                                             responseCode = "400",
                                             description = "Bad request, validation error or missing required fields",
                                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
-                                    ),
-                                    @ApiResponse(
-                                            responseCode = "404",
-                                            description = "User not found. The provided user ID does not exist in the system.",
-                                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
                                     )
                             }
                     )
@@ -79,7 +76,7 @@ public class AccountRouter {
                             tags = {"Accounts"},
                             operationId = "getByAccountNumber",
                             summary = "Get account by account number",
-                            description = "Fetches the account details associated with the given account number. If the account does not exist, it returns a 404 Not Found error.",
+                            description = "Fetches the account details associated with the given account number.",
                             parameters = {
                                     @Parameter(
                                             name = "accountNumber",
@@ -96,7 +93,81 @@ public class AccountRouter {
                                     ),
                                     @ApiResponse(
                                             responseCode = "404",
-                                            description = "Account not found. The account number does not exist in the system.",
+                                            description = "Account not found.",
+                                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
+                                    )
+                            }
+                    )
+            ),
+            @RouterOperation(
+                    path = "/accounts/getAll",
+                    operation = @Operation(
+                            tags = {"Accounts"},
+                            operationId = "listAccounts",
+                            summary = "List all accounts",
+                            description = "Fetches a list of all accounts available in the system.",
+                            responses = {
+                                    @ApiResponse(
+                                            responseCode = "200",
+                                            description = "Successfully retrieved the list of accounts",
+                                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = AccountResponseDTO[].class))
+                                    )
+                            }
+                    )
+            ),
+            @RouterOperation(
+                    path = "/accounts/{accountId}",
+                    operation = @Operation(
+                            tags = {"Accounts"},
+                            operationId = "getAccountById",
+                            summary = "Get account by ID",
+                            description = "Fetches the account details associated with the given account ID.",
+                            parameters = {
+                                    @Parameter(
+                                            name = "accountId",
+                                            description = "The account ID to retrieve account info",
+                                            required = true,
+                                            in = ParameterIn.PATH
+                                    )
+                            },
+                            responses = {
+                                    @ApiResponse(
+                                            responseCode = "200",
+                                            description = "Successfully retrieved the account details",
+                                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = AccountResponseDTO.class))
+                                    ),
+                                    @ApiResponse(
+                                            responseCode = "404",
+                                            description = "Account not found.",
+                                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
+                                    )
+                            }
+                    )
+            ),
+            @RouterOperation(
+                    path = "/accounts/{accountId}/balance",
+                    operation = @Operation(
+                            tags = {"Accounts"},
+                            operationId = "getAccountBalance",
+                            summary = "Get account balance",
+                            description = "Fetches the balance of the account associated with the given account ID.",
+                            parameters = {
+                                    @Parameter(
+                                            name = "accountId",
+                                            description = "The account ID to retrieve balance info",
+                                            required = true,
+                                            in = ParameterIn.PATH
+                                    )
+                            },
+                            responses = {
+                                    @ApiResponse(
+                                            responseCode = "200",
+                                            description = "Successfully retrieved the account balance",
+                                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = BigDecimal.class))
+                                    ),
+                                    @ApiResponse(
+                                            responseCode = "404",
+                                            description = "Account not found.",
                                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
                                     )
                             }
@@ -106,7 +177,10 @@ public class AccountRouter {
     public RouterFunction<ServerResponse> accountRoutes() {
         return RouterFunctions
                 .route(POST("/accounts").and(accept(MediaType.APPLICATION_JSON)), this::createAccount)
-                .andRoute(GET("/accounts/getByAccountNumber/{accountNumber}"), this::getAccountByAccountNumber);
+                .andRoute(GET("/accounts/getByAccountNumber/{accountNumber}"), this::getAccountByAccountNumber)
+                .andRoute(GET("/accounts/getAll"), this::listAccounts)
+                .andRoute(GET("/accounts/{accountId}"), this::getAccountById)
+                .andRoute(GET("/accounts/{accountId}/balance"), this::getAccountBalance);
     }
 
     public Mono<ServerResponse> createAccount(ServerRequest request) {
@@ -129,4 +203,35 @@ public class AccountRouter {
                         .bodyValue(accountResponseDTO))
                 .onErrorResume(ex -> globalErrorHandler.handleException(request.exchange(), ex));
     }
+
+    public Mono<ServerResponse> listAccounts(ServerRequest request) {
+        return handler.getAccounts()
+                .collectList()
+                .flatMap(accounts -> ServerResponse
+                        .status(HttpStatus.OK)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .bodyValue(accounts))
+                .onErrorResume(ex -> globalErrorHandler.handleException(request.exchange(), ex));
+    }
+
+    private Mono<ServerResponse> getAccountById(ServerRequest request) {
+        String accountId = request.pathVariable("accountId");
+        return handler.getAccountByAccountId(accountId)
+                .flatMap(response -> ServerResponse
+                        .ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .bodyValue(response))
+                .onErrorResume(ex -> globalErrorHandler.handleException(request.exchange(), ex));
+    }
+
+    private Mono<ServerResponse> getAccountBalance(ServerRequest request) {
+        String accountId = request.pathVariable("accountId");
+        return handler.getCheckBalance(accountId)
+                .flatMap(balance -> ServerResponse
+                        .ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .bodyValue(balance))
+                .onErrorResume(ex -> globalErrorHandler.handleException(request.exchange(), ex));
+    }
+
 }
