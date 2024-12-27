@@ -4,14 +4,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import ec.com.sofka.Transaction;
 import ec.com.sofka.TransactionType;
 import ec.com.sofka.dto.TransactionRequestDTO;
+import ec.com.sofka.exception.GlobalExceptionHandler;
 import ec.com.sofka.exception.NotFoundException;
+import ec.com.sofka.handler.TransactionHandler;
+import ec.com.sofka.handler.UserHandler;
+import ec.com.sofka.router.TransactionRouter;
+import ec.com.sofka.router.UserRouter;
 import ec.com.sofka.transaction.CreateTransactionUseCase;
 import ec.com.sofka.transaction.GetAllByAccountNumberUseCase;
+import ec.com.sofka.validator.RequestValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -25,8 +30,8 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureWebTestClient
+@WebFluxTest
+@ContextConfiguration(classes = {TransactionRouter.class, TransactionHandler.class, RequestValidator.class, GlobalExceptionHandler.class})
 public class TransactionRouterTest {
 
     @Autowired
@@ -37,7 +42,6 @@ public class TransactionRouterTest {
 
     @MockitoBean
     private GetAllByAccountNumberUseCase getAllByAccountNumber;
-
 
     private TransactionRequestDTO validTransactionRequest;
     private Transaction transactionResponse;

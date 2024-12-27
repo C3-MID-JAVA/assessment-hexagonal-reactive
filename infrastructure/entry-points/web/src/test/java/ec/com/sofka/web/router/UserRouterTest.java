@@ -1,6 +1,5 @@
 package ec.com.sofka.web.router;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import ec.com.sofka.User;
 import ec.com.sofka.dto.UserRequestDTO;
 import ec.com.sofka.dto.UserResponseDTO;
@@ -13,54 +12,39 @@ import ec.com.sofka.user.GetAllUseCase;
 import ec.com.sofka.validator.RequestValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.reactive.server.WebTestClient;
-import org.springframework.web.reactive.function.server.HandlerStrategies;
 import reactor.core.publisher.Mono;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+@WebFluxTest
+@ContextConfiguration(classes = {UserRouter.class, UserHandler.class, RequestValidator.class, GlobalExceptionHandler.class})
 public class UserRouterTest {
 
+    @Autowired
     private WebTestClient webTestClient;
 
-    @Mock
+    @MockitoBean
     private CreateUserUseCase createUserUseCase;
 
-    @Mock
-    private RequestValidator requestValidator;
-
-    @Mock
+    @MockitoBean
     private GetAllUseCase getAllUseCase;
 
-    @InjectMocks
-    private UserHandler userHandler;
 
     private UserRequestDTO validUserRequest;
     private UserResponseDTO userResponse;
 
 
     @BeforeEach
-    void setUp() {
+    void init() {
         validUserRequest = new UserRequestDTO("John Doe", "12345678");
-
-        MockitoAnnotations.openMocks(this);
-
-        GlobalExceptionHandler globalExceptionHandler = new GlobalExceptionHandler(new ObjectMapper());
-        UserRouter userRouter = new UserRouter(userHandler);
-
-        webTestClient = WebTestClient.bindToRouterFunction(userRouter.userRoutes()).build();
-
-        this.webTestClient = WebTestClient.bindToRouterFunction(userRouter.userRoutes())
-                .handlerStrategies(HandlerStrategies.builder()
-                        .exceptionHandler(globalExceptionHandler)
-                        .build())
-                .build();
     }
 
     @Test

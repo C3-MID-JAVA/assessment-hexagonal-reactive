@@ -5,13 +5,17 @@ import ec.com.sofka.account.CreateAccountUseCase;
 import ec.com.sofka.account.GetAccountByNumberUseCase;
 import ec.com.sofka.account.GetAllByUserIdUseCase;
 import ec.com.sofka.dto.AccountRequestDTO;
+import ec.com.sofka.exception.GlobalExceptionHandler;
 import ec.com.sofka.exception.NotFoundException;
+import ec.com.sofka.handler.AccountHandler;
+import ec.com.sofka.router.AccountRouter;
+import ec.com.sofka.validator.RequestValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
@@ -22,8 +26,8 @@ import java.util.List;
 
 import static org.mockito.Mockito.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureWebTestClient
+@WebFluxTest
+@ContextConfiguration(classes = {AccountRouter.class, AccountHandler.class, RequestValidator.class, GlobalExceptionHandler.class})
 public class AccountRouterTest {
 
     @Autowired
