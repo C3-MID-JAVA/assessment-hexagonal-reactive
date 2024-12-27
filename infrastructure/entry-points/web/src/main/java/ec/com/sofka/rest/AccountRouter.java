@@ -4,6 +4,8 @@ import ec.com.sofka.data.AccountInDTO;
 import ec.com.sofka.data.AccountOutDTO;
 import ec.com.sofka.handler.AccountHandler;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -15,6 +17,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -32,51 +35,41 @@ public class AccountRouter {
     }
 
     @Bean
-
     @RouterOperations({
             @RouterOperation(
                     path = "/v1/api/accounts",
+                    method = RequestMethod.POST,
                     operation = @Operation(
-                            summary = "Crear una nueva cuenta",
-                            description = "Crea una cuenta a partir de los datos proporcionados.",
-                            requestBody = @RequestBody(description = "Datos de la cuenta", required = true),
-                            responses = {
-                                    @ApiResponse(responseCode = "201", description = "Cuenta creada exitosamente"),
-                                    @ApiResponse(responseCode = "400", description = "Datos inválidos")
-                            }
+                            operationId = "saveAccount",
+                            summary = "Create new account",
+                            requestBody = @RequestBody(content = @Content(schema = @Schema(implementation = AccountInDTO.class))),
+                            responses = {@ApiResponse(responseCode = "201", description = "Account created")}
                     )
             ),
             @RouterOperation(
                     path = "/v1/api/accounts",
+                    method = RequestMethod.PUT,
                     operation = @Operation(
-                            summary = "Actualizar una cuenta",
-                            description = "Actualiza los detalles de una cuenta existente.",
-                            requestBody = @RequestBody(description = "Datos actualizados de la cuenta", required = true),
-                            responses = {
-                                    @ApiResponse(responseCode = "200", description = "Cuenta actualizada exitosamente"),
-                                    @ApiResponse(responseCode = "404", description = "Cuenta no encontrada")
-                            }
+                            operationId = "updateAccount",
+                            summary = "Update account",
+                            requestBody = @RequestBody(content = @Content(schema = @Schema(implementation = AccountInDTO.class)))
                     )
             ),
             @RouterOperation(
                     path = "/v1/api/accounts/{id}",
+                    method = RequestMethod.GET,
                     operation = @Operation(
-                            summary = "Obtener cuenta por ID",
-                            description = "Devuelve los detalles de una cuenta utilizando su ID.",
-                            responses = {
-                                    @ApiResponse(responseCode = "200", description = "Cuenta encontrada"),
-                                    @ApiResponse(responseCode = "404", description = "Cuenta no encontrada")
-                            }
+                            operationId = "getAccountById",
+                            summary = "Get account by ID",
+                            parameters = @Parameter(name = "id", in = ParameterIn.PATH)
                     )
             ),
             @RouterOperation(
                     path = "/v1/api/accounts",
+                    method = RequestMethod.GET,
                     operation = @Operation(
-                            summary = "Obtener todas las cuentas",
-                            description = "Devuelve una lista de todas las cuentas.",
-                            responses = {
-                                    @ApiResponse(responseCode = "200", description = "Lista de cuentas encontrada")
-                            }
+                            operationId = "getAllAccounts",
+                            summary = "Get all accounts"
                     )
             )
     })
