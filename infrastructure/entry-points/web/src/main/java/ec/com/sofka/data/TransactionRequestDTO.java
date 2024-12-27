@@ -32,6 +32,10 @@ public class TransactionRequestDTO {
         this.transactionType = transactionType;
     }
 
+    public TransactionRequestDTO(){
+
+    }
+
     public String getAccountNumber() {
         return accountNumber;
     }

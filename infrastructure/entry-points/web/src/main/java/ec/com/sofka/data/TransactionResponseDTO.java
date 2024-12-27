@@ -31,6 +31,9 @@ public class TransactionResponseDTO {
         this.accountNumber = accountNumber;
     }
 
+    public TransactionResponseDTO(){
+
+    }
 
     public String getId() {
         return id;

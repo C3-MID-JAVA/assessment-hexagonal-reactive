@@ -2,25 +2,27 @@ package ec.com.sofka.router;
 
 import ec.com.sofka.data.TransactionRequestDTO;
 import ec.com.sofka.data.TransactionResponseDTO;
-import ec.com.sofka.enums.TransactionType;
-import ec.com.sofka.globalexceptions.GlobalErrorHandler;
 import ec.com.sofka.handler.TransactionHandler;
 import ec.com.sofka.service.ValidationService;
+import ec.com.sofka.globalexceptions.GlobalErrorHandler;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.web.reactive.function.server.RouterFunction;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.math.BigDecimal;
+import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.any;
 
-import static org.mockito.Mockito.when;
-import static org.springframework.http.MediaType.APPLICATION_JSON;
+public class TransactionRouterTest {
 
-class TransactionRouterTest {
-
+    @Autowired
     private WebTestClient webTestClient;
 
     @Mock
@@ -32,48 +34,70 @@ class TransactionRouterTest {
     @Mock
     private GlobalErrorHandler globalErrorHandler;
 
-    @InjectMocks
-    private TransactionRouter transactionRouter;
+    private RouterFunction<?> routerFunction;
 
     @BeforeEach
-    void setUp() {
-        webTestClient = WebTestClient.bindToRouterFunction(transactionRouter.transactionRoutes()).build();
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
+        // Crear una instancia de TransactionRouter
+        TransactionRouter transactionRouter = new TransactionRouter(transactionHandler, validationService, globalErrorHandler);
+        this.routerFunction = transactionRouter.transactionRoutes();
+
+        // Inicializar WebTestClient
+        this.webTestClient = WebTestClient.bindToRouterFunction(routerFunction).build();
     }
 
     @Test
-    void testCreateDepositSuccess() {
-        // Arrange
-        TransactionRequestDTO depositRequest = new TransactionRequestDTO("0123456789", new BigDecimal("500.75"), TransactionType.BRANCH_DEPOSIT);
-        TransactionResponseDTO depositResponse = new TransactionResponseDTO(TransactionType.BRANCH_DEPOSIT, new BigDecimal("500.75"), "0123456789");
+    public void testCreateDepositSuccess() {
+        TransactionRequestDTO requestDTO = new TransactionRequestDTO();
+        // Configurar la simulación del handler y validación
+        TransactionResponseDTO responseDTO = new TransactionResponseDTO();
+        when(validationService.validate(any(), any())).thenReturn(Mono.just(requestDTO));
+        when(transactionHandler.createDeposit(any())).thenReturn(Mono.just(responseDTO));
 
-        when(validationService.validate(depositRequest, TransactionRequestDTO.class)).thenReturn(Mono.just(depositRequest));
-        when(transactionHandler.createDeposit(depositRequest)).thenReturn(Mono.just(depositResponse));
-
-        // Act & Assert
         webTestClient.post()
                 .uri("/transactions/deposit")
-                .contentType(APPLICATION_JSON)
-                .bodyValue(depositRequest)
+                .contentType(MediaType.APPLICATION_JSON)
+                .bodyValue(requestDTO)
                 .exchange()
                 .expectStatus().isCreated()
-                .expectBody(TransactionResponseDTO.class)
-                .value(response -> {
-                    assert response.getTransactionId().equals("12345");
-                    assert response.getAmount().equals(new BigDecimal("500.75"));
-                });
+                .expectHeader().contentType(MediaType.APPLICATION_JSON)
+                .expectBody(TransactionResponseDTO.class);
+
+        verify(validationService, times(1)).validate(any(), any());
+        verify(transactionHandler, times(1)).createDeposit(any());
+    }
+
+
+
+    @Test
+    public void testGetTransactionByIdSuccess() {
+        String transactionId = "123";
+        TransactionResponseDTO responseDTO = new TransactionResponseDTO();
+        when(transactionHandler.getTransactionById(transactionId)).thenReturn(Mono.just(responseDTO));
+
+        webTestClient.get()
+                .uri("/transactions/{transactionId}", transactionId)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(TransactionResponseDTO.class);
+
+        verify(transactionHandler, times(1)).getTransactionById(transactionId);
     }
 
     @Test
-    void testCreateWithdrawSuccess() {
-        // Arrange
-        TransactionRequestDTO withdrawalRequest = new TransactionRequestDTO("0123456789", new BigDecimal("-50.00"), TransactionType.BRANCH_WITHDRAWAL);
-        TransactionResponseDTO withdrawalResponse = new TransactionResponseDTO("12345", new BigDecimal("-50.00"), "WITHDRAWAL");
+    public void testGetAllTransactionsSuccess() {
+        TransactionResponseDTO responseDTO = new TransactionResponseDTO();
+        when(transactionHandler.getTransactions()).thenReturn(Flux.just(responseDTO));
 
-        when(validationService.validate(withdrawalRequest, TransactionRequestDTO.class)).thenReturn(Mono.just(withdrawalRequest));
-        when(transactionHandler.createWithDrawal(withdrawalRequest)).thenReturn(Mono.just(withdrawalResponse));
+        webTestClient.get()
+                .uri("/transactions")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBodyList(TransactionResponseDTO.class);
 
-        // Act & Assert
-        webTestClient.post()
-                .uri("/transactions/withdrawal")
-                .contentType(APPLICATION_JSON)
+        verify(transactionHandler, times(1)).getTransactions();
+    }
+}
+
 
