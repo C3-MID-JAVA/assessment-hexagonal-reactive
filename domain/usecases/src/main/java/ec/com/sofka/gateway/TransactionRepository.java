@@ -1,7 +1,6 @@
 package ec.com.sofka.gateway;
 
 import ec.com.sofka.Transaction;
-import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

@@ -46,13 +46,13 @@ public Mono<Transaction> apply(String accountNumber, Transaction transaction) {
 
                     Transaction newTransaction = new Transaction();
                     newTransaction.setTransactionType(transactionType);
-                    newTransaction.setAmount(newTransaction.getAmount());
+                    newTransaction.setAmount(transaction.getAmount());
                     newTransaction.setFee(fee);
                     newTransaction.setDate(LocalDateTime.now());
-                    newTransaction.setDescription(newTransaction.getDescription());
+                    newTransaction.setDescription(transaction.getDescription());
                     newTransaction.setAccount(account);
 
-                    account.setBalance(account.getBalance().subtract(newTransaction.getAmount()).subtract(fee));
+                    account.setBalance(account.getBalance().subtract(transaction.getAmount()).subtract(fee));
 
                     return accountRepository.save(account)
                             .then(transactionRepository.save(newTransaction))

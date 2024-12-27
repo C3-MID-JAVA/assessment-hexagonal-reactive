@@ -74,7 +74,7 @@ public class TransactionRouter {
                     operation = @Operation(
                             tags = {"Transactions"},
                             operationId = "getByAccountNumber",
-                            summary = "Get all transaction from account by account number ",
+                            summary = "Get all transactions from account by account number ",
                             description = "Retrieve all transactions from a specific account with their respective details",
                             responses = {
                                     @ApiResponse(

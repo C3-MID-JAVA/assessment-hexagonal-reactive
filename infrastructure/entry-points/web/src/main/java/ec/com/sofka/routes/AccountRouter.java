@@ -38,6 +38,7 @@ public class AccountRouter {
     @RouterOperations({
             @RouterOperation(
                     path = "/accounts",
+                    method = RequestMethod.POST,
                     operation = @Operation(
                             tags = {"Accounts"},
                             operationId = "create",
@@ -67,6 +68,7 @@ public class AccountRouter {
             ),
             @RouterOperation(
                     path = "/accounts",
+                    method = RequestMethod.GET,
                     operation = @Operation(
                             tags = {"Accounts"},
                             operationId = "getAll",
