@@ -1,7 +1,9 @@
-rootProject.name = 'hexagonalarchitecture'
+rootProject.name = 'usrv-accounts-manager-hexa'
 
-include ':app-service'
-findProject(':app-service').projectDir = file('./applications/app-service')
+
+include ':app-account-manager'
+findProject(':app-account-manager').projectDir = file('./application/app-account-manager')
+
 
 include ':model'
 findProject(':model').projectDir = file('./domain/model')
@@ -14,3 +16,7 @@ findProject(':mongo-repository').projectDir = file('./infrastructure/driven-adap
 
 include ':web'
 findProject(':web').projectDir = file('./infrastructure/entry-points/web')
+
+include ':helpers'
+findProject(':helpers').projectDir = file('./infrastructure/shared/helpers')
+
