@@ -15,15 +15,16 @@ public class AccountEntity {
     private String accountNumber;
 
     @Field("account_holder")
-    private String owner;
+    private String accountHolder;
 
     @Field("global_balance")
     private BigDecimal balance;
 
 
-    public AccountEntity(BigDecimal balance, String owner, String accountNumber) {
+    public AccountEntity(String id, BigDecimal balance, String accountHolder, String accountNumber) {
+        this.id = id;
         this.balance = balance;
-        this.owner = owner;
+        this.accountHolder = accountHolder;
         this.accountNumber = accountNumber;
     }
 
@@ -44,12 +45,12 @@ public class AccountEntity {
         this.accountNumber = accountNumber;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getAccountHolder() {
+        return accountHolder;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setAccountHolder(String owner) {
+        this.accountHolder = owner;
     }
 
     public BigDecimal getBalance() {
