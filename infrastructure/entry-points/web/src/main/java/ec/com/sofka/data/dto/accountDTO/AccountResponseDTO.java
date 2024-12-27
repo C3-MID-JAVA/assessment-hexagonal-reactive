@@ -1,22 +1,12 @@
-package ec.com.sofka;
+package ec.com.sofka.data.dto.accountDTO;
 
 import java.math.BigDecimal;
 
-public class Account {
+public class AccountResponseDTO {
     private String id;
     private BigDecimal balance;
     private String accountNumber;
     private String owner;
-
-    public Account() {
-    }
-
-    public Account(String id,BigDecimal balance, String accountNumber, String owner) {
-        this.id = id;
-        this.balance = balance;
-        this.accountNumber = accountNumber;
-        this.owner = owner;
-    }
 
     public String getId() {
         return id;
@@ -50,5 +40,16 @@ public class Account {
         this.owner = owner;
     }
 
+    public AccountResponseDTO(String id, BigDecimal balance, String accountNumber, String owner) {
+        this.id = id;
+        this.balance = balance;
+        this.accountNumber = accountNumber;
+        this.owner = owner;
+    }
 
+    public AccountResponseDTO(BigDecimal balance, String accountNumber, String owner) {
+        this.balance = balance;
+        this.accountNumber = accountNumber;
+        this.owner = owner;
+    }
 }

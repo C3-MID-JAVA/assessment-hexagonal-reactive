@@ -1,4 +1,4 @@
-rootProject.name = 'hexagonalarchitecture'
+rootProject.name = 'exagonalarchitecture'
 
 include ':app-service'
 findProject(':app-service').projectDir = file('./applications/app-service')

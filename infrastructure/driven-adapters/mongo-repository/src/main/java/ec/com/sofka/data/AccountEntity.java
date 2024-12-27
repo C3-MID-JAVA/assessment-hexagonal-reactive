@@ -5,26 +5,26 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.math.BigDecimal;
+import java.util.List;
 
-@Document(collection = "bank_account")
+@Document(collection = "account")
 public class AccountEntity {
+
     @Id
     private String id;
-
-    @Field("account_number")
+    private BigDecimal balance;
     private String accountNumber;
-
-    @Field("account_holder")
     private String owner;
 
-    @Field("global_balance")
-    private BigDecimal balance;
+    public AccountEntity() {
+    }
 
-
-    public AccountEntity(BigDecimal balance, String owner, String accountNumber) {
+    public AccountEntity(String id, BigDecimal balance, String accountNumber, String owner, List<TransactionEntity> transacciones) {
+        this.id = id;
         this.balance = balance;
-        this.owner = owner;
         this.accountNumber = accountNumber;
+        this.owner = owner;
+        this.transacciones = transacciones;
     }
 
     public String getId() {
@@ -35,6 +35,13 @@ public class AccountEntity {
         this.id = id;
     }
 
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
 
     public String getAccountNumber() {
         return accountNumber;
@@ -52,12 +59,13 @@ public class AccountEntity {
         this.owner = owner;
     }
 
-    public BigDecimal getBalance() {
-        return balance;
+    public List<TransactionEntity> getTransacciones() {
+        return transacciones;
     }
 
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
+    public void setTransacciones(List<TransactionEntity> transacciones) {
+        this.transacciones = transacciones;
     }
+
+    private List<TransactionEntity> transacciones;
 }
-

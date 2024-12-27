@@ -1,9 +1,10 @@
-dependencies {
+group = 'ec.com.sofka'
+version = '0.0.1-SNAPSHOT'
 
-    implementation project (':usecases')
-    implementation project (':mongo-repository')
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation project(':usecases')
+    implementation project(':mongo-repository')
     implementation project(':web')
 
-    implementation 'org.springframework.boot:spring-boot-starter'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
 }
