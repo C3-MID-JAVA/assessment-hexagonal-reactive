@@ -1,0 +1,13 @@
+dependencies {
+    implementation project(':model')
+    implementation project(':usecases')
+
+
+    implementation('org.springframework.boot:spring-boot-starter-data-mongodb-reactive')
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+
+    compileOnly("org.projectlombok:lombok:1.18.36")
+    annotationProcessor("org.projectlombok:lombok:1.18.36")
+    testCompileOnly("org.projectlombok:lombok:1.18.36")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.36")
+}
