@@ -1,25 +1,25 @@
-package ec.com.sofka;
+package ec.com.sofka.data;
 
+import ec.com.sofka.Transaction;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
-public class Account {
+public class AccountResponseDTO {
+    @NotNull
     private String id;
     private BigDecimal balance;
     private String accountNumber;
-    private String accountHolder;
-    private List<Transaction> transactions = new ArrayList<>();
+    public String accountHolder;
+    private List<Transaction> transactions;
 
-    public Account() {
-    }
-
-    public Account(String id, BigDecimal balance, String accountHolder, String accountNumber) {
+    public AccountResponseDTO(String id, BigDecimal balance, String accountNumber, String accountHolder, List<Transaction> transactions) {
         this.id = id;
         this.balance = balance;
-        this.accountHolder = accountHolder;
         this.accountNumber = accountNumber;
+        this.accountHolder = accountHolder;
+        this.transactions = transactions;
     }
 
     public String getId() {
@@ -61,5 +61,4 @@ public class Account {
     public void setTransactions(List<Transaction> transactions) {
         this.transactions = transactions;
     }
-
 }

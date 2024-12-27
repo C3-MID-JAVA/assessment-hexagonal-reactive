@@ -4,11 +4,11 @@ version = '0.0.1-SNAPSHOT'
 dependencies {
     implementation project(':usecases')
     implementation project(':model')
-    implementation project(":mongo-repository")
 
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0'
+   // implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+    implementation 'org.mongodb:mongodb-driver-sync:5.2.1'
 }
