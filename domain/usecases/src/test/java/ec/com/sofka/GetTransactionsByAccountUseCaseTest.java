@@ -1,5 +1,6 @@
 package ec.com.sofka;
 
+import ec.com.sofka.gateway.AccountRepository;
 import ec.com.sofka.gateway.TransactionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,12 +21,15 @@ class GetTransactionsByAccountUseCaseTest {
     @Mock
     private TransactionRepository transactionRepository;
 
+    @Mock
+    private AccountRepository accountRepository;
+
     private GetTransactionsByAccountUseCase useCase;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        useCase = new GetTransactionsByAccountUseCase(transactionRepository);
+        useCase = new GetTransactionsByAccountUseCase(transactionRepository, accountRepository);
     }
 
     @Test
