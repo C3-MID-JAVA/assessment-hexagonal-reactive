@@ -1,30 +1,44 @@
 package ec.com.sofka.data;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.math.BigDecimal;
 
-@Document(collection = "bank_account")
+@Document(collection = "accounts")
 public class AccountEntity {
+
     @Id
     private String id;
 
-    @Field("account_number")
-    private String accountNumber;
+    @Indexed(unique = true)
+    @Field(name = "number")
+    private String number;
 
-    @Field("account_holder")
-    private String owner;
+    @Field(name = "available_balance")
+    private BigDecimal availableBalance;
 
-    @Field("global_balance")
-    private BigDecimal balance;
+    @Field(name = "retained_balance")
+    private BigDecimal retainedBalance;
 
+    @Field(name = "status")
+    private String status;
 
-    public AccountEntity(BigDecimal balance, String owner, String accountNumber) {
-        this.balance = balance;
-        this.owner = owner;
-        this.accountNumber = accountNumber;
+    @Field(name = "user")
+    private UserEntity user;
+
+    public AccountEntity() {
+    }
+
+    public AccountEntity(String id, String number, BigDecimal availableBalance, BigDecimal retainedBalance, String status, UserEntity user) {
+        this.id = id;
+        this.number = number;
+        this.availableBalance = availableBalance;
+        this.retainedBalance = retainedBalance;
+        this.status = status;
+        this.user = user;
     }
 
     public String getId() {
@@ -35,29 +49,43 @@ public class AccountEntity {
         this.id = id;
     }
 
-
-    public String getAccountNumber() {
-        return accountNumber;
+    public String getNumber() {
+        return number;
     }
 
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public String getOwner() {
-        return owner;
+    public BigDecimal getAvailableBalance() {
+        return availableBalance;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setAvailableBalance(BigDecimal availableBalance) {
+        this.availableBalance = availableBalance;
     }
 
-    public BigDecimal getBalance() {
-        return balance;
+    public BigDecimal getRetainedBalance() {
+        return retainedBalance;
     }
 
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
+    public void setRetainedBalance(BigDecimal retainedBalance) {
+        this.retainedBalance = retainedBalance;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity userEntity) {
+        this.user = userEntity;
     }
 }
-
