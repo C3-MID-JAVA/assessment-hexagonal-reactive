@@ -4,8 +4,10 @@ import ec.com.sofka.data.TransactionRequestDTO;
 import ec.com.sofka.data.TransactionResponseDTO;
 import ec.com.sofka.exception.RequestValidator;
 import ec.com.sofka.exception.model.ErrorDetails;
+import ec.com.sofka.handler.account.GetAllAccountsHandler;
 import ec.com.sofka.handler.transaction.CreateTransactionHandler;
 import ec.com.sofka.handler.transaction.GetAllTransactionsHandler;
+import ec.com.sofka.handler.user.GetAllUsersHandler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,6 +17,8 @@ import org.springdoc.core.annotations.RouterOperation;
 import org.springdoc.core.annotations.RouterOperations;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -41,12 +45,15 @@ public class TransactionRouter {
     @RouterOperations({
             @RouterOperation(
                     path = "/api/transactions",
+                    produces = {MediaType.APPLICATION_JSON_VALUE},
+                    method = RequestMethod.POST,
+                    beanClass = CreateTransactionHandler.class,
+                    beanMethod = "save",
                     operation = @Operation(
                             tags = {"Transactions"},
                             operationId = "createTransaction",
                             summary = "Create a new transaction",
                             description = "Create a new transaction from the request data.",
-                            method = "POST",
                             requestBody = @RequestBody(
                                     description = "Details of the required entity.",
                                     required = true,
@@ -81,12 +88,14 @@ public class TransactionRouter {
             ),
             @RouterOperation(
                     path = "/api/transactions",
+                    method = RequestMethod.GET,
+                    beanClass = GetAllTransactionsHandler.class,
+                    beanMethod = "getAllTransactions",
                     operation = @Operation(
                             tags = {"Transactions"},
                             operationId = "getAllTransactions",
                             summary = "Get all transactions",
                             description = "Get all registered transactions.",
-                            method = "GET",
                             responses = {
                                     @ApiResponse(
                                             responseCode = "200",

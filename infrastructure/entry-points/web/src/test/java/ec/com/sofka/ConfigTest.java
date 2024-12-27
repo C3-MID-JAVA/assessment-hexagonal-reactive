@@ -7,9 +7,6 @@ import org.springframework.context.annotation.FilterType;
 
 @Configuration
 @EnableAutoConfiguration
-@ComponentScan( basePackages = "ec.com.sofka",
-        includeFilters = {
-                @ComponentScan.Filter(type= FilterType.REGEX, pattern = "^.+Test$")
-        })
+@ComponentScan( basePackages = "ec.com.sofka")
 public class ConfigTest {
 }

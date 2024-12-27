@@ -6,6 +6,7 @@ import ec.com.sofka.exception.RequestValidationException;
 import ec.com.sofka.exception.RequestValidator;
 import ec.com.sofka.handler.user.CreateUserHandler;
 import ec.com.sofka.handler.user.GetAllUsersHandler;
+import jakarta.validation.Validator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,6 +33,9 @@ public class UserRouterTest {
 
     @Mock
     private GetAllUsersHandler getAllUsersHandler;
+
+    @Mock
+    private Validator validator;
 
     @InjectMocks
     private UserRouter userRouter;

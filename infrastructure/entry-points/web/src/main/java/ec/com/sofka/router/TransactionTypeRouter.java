@@ -4,6 +4,7 @@ import ec.com.sofka.data.TransactionTypeRequestDTO;
 import ec.com.sofka.data.TransactionTypeResponseDTO;
 import ec.com.sofka.exception.RequestValidator;
 import ec.com.sofka.exception.model.ErrorDetails;
+import ec.com.sofka.handler.transaction.CreateTransactionHandler;
 import ec.com.sofka.handler.transcationType.CreateTransactionTypeHandler;
 import ec.com.sofka.handler.transcationType.GetAllTransactionTypesHandler;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,6 +16,8 @@ import org.springdoc.core.annotations.RouterOperation;
 import org.springdoc.core.annotations.RouterOperations;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -40,12 +43,15 @@ public class TransactionTypeRouter {
     @RouterOperations({
             @RouterOperation(
                     path = "/api/transaction-types",
+                    produces = {MediaType.APPLICATION_JSON_VALUE},
+                    method = RequestMethod.POST,
+                    beanClass = CreateTransactionTypeHandler.class,
+                    beanMethod = "save",
                     operation = @Operation(
                             tags = {"TransactionTypes"},
                             operationId = "createTransactionType",
                             summary = "Create a new transaction type",
                             description = "Create a transaction type user from the request data.",
-                            method = "POST",
                             requestBody = @RequestBody(
                                     description = "Details of the required entity.",
                                     required = true,
@@ -80,12 +86,14 @@ public class TransactionTypeRouter {
             ),
             @RouterOperation(
                     path = "/api/transaction-types",
+                    method = RequestMethod.GET,
+                    beanClass = GetAllTransactionTypesHandler.class,
+                    beanMethod = "getAllTransactionTypes",
                     operation = @Operation(
                             tags = {"TransactionTypes"},
                             operationId = "getAllTransactionTypes",
                             summary = "Get all transaction types",
                             description = "Get all registered transaction types.",
-                            method = "GET",
                             responses = {
                                     @ApiResponse(
                                             responseCode = "200",

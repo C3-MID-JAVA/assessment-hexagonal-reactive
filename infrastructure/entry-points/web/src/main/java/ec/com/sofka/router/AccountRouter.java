@@ -15,6 +15,8 @@ import org.springdoc.core.annotations.RouterOperation;
 import org.springdoc.core.annotations.RouterOperations;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -40,12 +42,15 @@ public class AccountRouter {
     @RouterOperations({
             @RouterOperation(
                     path = "/api/accounts",
+                    produces = {MediaType.APPLICATION_JSON_VALUE},
+                    method = RequestMethod.POST,
+                    beanClass = CreateAccountHandler.class,
+                    beanMethod = "save",
                     operation = @Operation(
                             tags = {"Accounts"},
                             operationId = "createAccount",
                             summary = "Create a new account",
                             description = "Create a new account from the request data.",
-                            method = "POST",
                             requestBody = @RequestBody(
                                     description = "Details of the required entity.",
                                     required = true,
@@ -80,12 +85,14 @@ public class AccountRouter {
             ),
             @RouterOperation(
                     path = "/api/accounts",
+                    method = RequestMethod.GET,
+                    beanClass = GetAllAccountsHandler.class,
+                    beanMethod = "getAllAccounts",
                     operation = @Operation(
                             tags = {"Accounts"},
                             operationId = "getAllAccounts",
                             summary = "Get all accounts",
                             description = "Get all registered accounts.",
-                            method = "GET",
                             responses = {
                                     @ApiResponse(
                                             responseCode = "200",
