@@ -1,18 +1,37 @@
 package ec.com.sofka;
 
-
 import java.math.BigDecimal;
 
 public class Account {
     private String id;
-    private BigDecimal balance;
     private String accountNumber;
-    private String owner;
+    private BigDecimal balance;
+    private String userId;
 
-    public Account(String id, BigDecimal balance, String owner, String accountNumber) {
+    public Account(String userId) {
+        this.userId = userId;
+    }
+
+    public Account(String id, String accountNumber, BigDecimal balance, String userId) {
         this.id = id;
+        this.accountNumber = accountNumber;
         this.balance = balance;
-        this.owner = owner;
+        this.userId = userId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
     }
 
@@ -24,19 +43,11 @@ public class Account {
         this.balance = balance;
     }
 
-    public String getAccountNumber() {
-        return accountNumber;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }
