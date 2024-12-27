@@ -6,25 +6,21 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.math.BigDecimal;
 
-@Document(collection = "bank_account")
+@Document(collection = "bank_accounts")
 public class AccountEntity {
     @Id
     private String id;
 
-    @Field("account_number")
-    private String accountNumber;
-
-    @Field("account_holder")
+    @Field("accountHolder")
     private String owner;
 
-    @Field("global_balance")
+    @Field("balance")
     private BigDecimal balance;
 
 
-    public AccountEntity(BigDecimal balance, String owner, String accountNumber) {
+    public AccountEntity(BigDecimal balance, String owner) {
         this.balance = balance;
         this.owner = owner;
-        this.accountNumber = accountNumber;
     }
 
     public String getId() {
@@ -33,15 +29,6 @@ public class AccountEntity {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
     }
 
     public String getOwner() {
@@ -59,5 +46,6 @@ public class AccountEntity {
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
+
 }
 

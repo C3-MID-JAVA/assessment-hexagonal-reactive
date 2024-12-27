@@ -1,7 +1,34 @@
 dependencies {
+    // Dependencias principales del proyecto
     implementation project(':usecases')
     implementation project(':model')
 
+    // Dependencia de Spring Boot Starter (incluye WebFlux)
     implementation 'org.springframework.boot:spring-boot-starter'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+    // Dependencias para pruebas con Mockito
+    testImplementation 'org.mockito:mockito-core'
+    testImplementation 'org.mockito:mockito-junit-jupiter'
+
+    // Dependencia para pruebas reactivas de Reactor
+    testImplementation 'io.projectreactor:reactor-test'
+
+    // Dependencia para Spring Boot Test (incluye WebTestClient)
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    // Dependencia para usar WebTestClient
+    testImplementation 'org.springframework:spring-webflux'
+
+    implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.7.0'
+}
+
+
+test {
+    useJUnitPlatform() // Asegura que se usen las pruebas de JUnit Jupiter (JUnit 5)
+    testLogging {
+        events "passed", "skipped", "failed"  // Muestra los resultados de las pruebas
+        exceptionFormat "full"  // Muestra el stack trace completo de las excepciones
+        showStandardStreams = true  // Muestra la salida estándar (System.out) durante las pruebas
+    }
 }

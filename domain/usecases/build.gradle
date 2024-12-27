@@ -1,3 +1,23 @@
 dependencies {
     implementation project(':model')
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    // Dependencias de JUnit 5
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+    // Dependencias de Mockito
+    testImplementation 'org.mockito:mockito-core'
+    testImplementation 'org.mockito:mockito-junit-jupiter'
+
+    // Reactor Test
+    testImplementation 'io.projectreactor:reactor-test'
+}
+
+test {
+    useJUnitPlatform() // Asegura que se usen las pruebas de JUnit Jupiter (JUnit 5)
+    testLogging {
+        events "passed", "skipped", "failed"  // Muestra los resultados de las pruebas
+        exceptionFormat "full"  // Muestra el stack trace completo de las excepciones
+        showStandardStreams = true  // Muestra la salida estándar (System.out) durante las pruebas
+    }
 }
