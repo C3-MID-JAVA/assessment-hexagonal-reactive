@@ -9,5 +9,5 @@ import reactor.core.publisher.Mono;
 import java.math.BigDecimal;
 
 public interface TransactionMongoRepository extends ReactiveMongoRepository<TransactionEntity, String> {
-    Flux<TransactionEntity> findByAccountNumber(String accountNumber);
+
 }

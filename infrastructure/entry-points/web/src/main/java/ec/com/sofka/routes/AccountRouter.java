@@ -87,7 +87,7 @@ public class AccountRouter {
                     )
             ),
     })
-    public RouterFunction<ServerResponse> accountRoutes(GetAllAccountsUseCase getAllAccountsUseCase, AccountHandler handler){
+    public RouterFunction<ServerResponse> accountRoutes(){
         return RouterFunctions
                 .route(RequestPredicates.POST("/accounts").and(accept(MediaType.APPLICATION_JSON)), this::createAccount)
                 .andRoute(RequestPredicates.GET("/accounts"), this::getAllAccounts);

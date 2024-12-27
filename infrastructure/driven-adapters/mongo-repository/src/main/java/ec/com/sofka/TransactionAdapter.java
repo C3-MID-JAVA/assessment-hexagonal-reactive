@@ -31,7 +31,8 @@ public class TransactionAdapter  implements  TransactionRepository{
 
     @Override
     public Flux<Transaction> findByAccountNumber(String accountNumber) {
-        return transactionMongoRepository.findByAccountNumber(accountNumber)
-                .map(TransactionMapper::toTransaction);
+        return null;
+       /* return transactionMongoRepository.findByAccountNumber(accountNumber)
+                .map(TransactionMapper::toTransaction);*/
     }
 }

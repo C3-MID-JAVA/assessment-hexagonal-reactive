@@ -6,7 +6,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 
-@Component
 public interface TransactionRepository {
     Flux<Transaction> findAll();
     Mono<Transaction> save(Transaction transaction);

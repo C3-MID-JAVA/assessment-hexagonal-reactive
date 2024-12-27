@@ -3,6 +3,8 @@ package ec.com.sofka.routes;
 import ec.com.sofka.RegisterTransactionUseCase;
 import ec.com.sofka.data.TransactionRequestDTO;
 import ec.com.sofka.data.TransactionResponseDTO;
+import ec.com.sofka.exceptions.AccountNotFoundException;
+import ec.com.sofka.exceptions.GlobalExceptionHandler;
 import ec.com.sofka.handlers.TransactionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,9 +26,11 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 public class TransactionRouter {
 
     private final TransactionHandler transactionHandler;
+    private final GlobalExceptionHandler globalExceptionHandler;
 
-    public TransactionRouter(TransactionHandler transactionHandler) {
+    public TransactionRouter(TransactionHandler transactionHandler, GlobalExceptionHandler globalExceptionHandler) {
         this.transactionHandler = transactionHandler;
+        this.globalExceptionHandler = globalExceptionHandler;
     }
 
     @Bean
@@ -58,13 +62,34 @@ public class TransactionRouter {
                                             content = @Content(mediaType = "application/json")
                                     ),
                                     @ApiResponse(
-                                            responseCode = "404",
+                                            responseCode = "400",
                                             description = "Insufficient balance for this transaction",
                                             content = @Content(mediaType = "application/json")
                                     )
                             }
                     )
-            )
+            ),
+            @RouterOperation(
+                    path = "/transactions/{accountNumber}",
+                    operation = @Operation(
+                            tags = {"Transactions"},
+                            operationId = "getByAccountNumber",
+                            summary = "Get all transaction from account by account number ",
+                            description = "Retrieve all transactions from a specific account with their respective details",
+                            responses = {
+                                    @ApiResponse(
+                                            responseCode = "200",
+                                            description = "Transactions retrieved successfully",
+                                            content = @Content(mediaType = "application/json")
+                                    ),
+                                    @ApiResponse(
+                                            responseCode = "204",
+                                            description = "No content found",
+                                            content = @Content(mediaType = "application/json")
+                                    )
+                            }
+                    )
+            ),
     })
     public RouterFunction<ServerResponse> transactionRoutes() {
         return RouterFunctions
@@ -83,6 +108,15 @@ public class TransactionRouter {
     }
 
     public Mono<ServerResponse> getTransactionsByAccount(ServerRequest request){
-        return null;
+        String accountNumber = request.pathVariable("accountNumber");
+        return transactionHandler.getTransactionsByAccount(accountNumber)
+                .switchIfEmpty(Mono.error (new AccountNotFoundException("Account not found")))
+                .collectList()
+                .flatMap(transactionResponseDTO -> ServerResponse
+                        .status(HttpStatus.OK)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .bodyValue(transactionResponseDTO)
+                        
+                );
     }
 }

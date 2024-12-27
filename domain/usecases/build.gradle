@@ -9,4 +9,13 @@ dependencies {
     //implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
    // implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.11.4'
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.14.2'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
 }
