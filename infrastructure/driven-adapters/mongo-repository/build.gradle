@@ -2,18 +2,27 @@ group = 'co.com.sofkau'
 version = '0.0.1-SNAPSHOT'
 
 
-
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
-    implementation project(':model')
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+
+    implementation project(":model")
+    implementation project(":usecases")
     implementation project(":helpers")
 
     testImplementation 'org.mockito:mockito-core'
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
     testImplementation 'io.projectreactor:reactor-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
+    testImplementation 'org.springframework:spring-webflux'
+    testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:4.6.0'
 
+
+
+
+}
 tasks.named('test') {
     useJUnitPlatform()
 }
