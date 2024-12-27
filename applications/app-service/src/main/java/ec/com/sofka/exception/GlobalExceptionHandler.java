@@ -1,7 +1,10 @@
 package ec.com.sofka.exception;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import ec.com.sofka.customException.*;
+import ec.com.sofka.customException.AlreadyExistsException;
+import ec.com.sofka.customException.InsufficientBalanceException;
+import ec.com.sofka.customException.InvalidTypeException;
+import ec.com.sofka.customException.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.codec.HttpMessageWriter;
@@ -29,8 +32,7 @@ public class GlobalExceptionHandler implements WebExceptionHandler {
         return switch (ex) {
             case MethodArgumentNotValidException methodArgumentNotValidException ->
                     handleValidationExceptions(methodArgumentNotValidException, exchange);
-            case NotFoundException notFoundException ->
-                    handleNotFoundException(notFoundException, exchange);
+            case NotFoundException notFoundException -> handleNotFoundException(notFoundException, exchange);
             case InsufficientBalanceException insufficientBalanceException ->
                     handleInsufficientBalanceException(insufficientBalanceException, exchange);
             case InvalidTypeException invalidTransactionTypeException ->

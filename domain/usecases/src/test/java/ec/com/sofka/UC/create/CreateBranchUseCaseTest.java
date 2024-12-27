@@ -1,6 +1,5 @@
 package ec.com.sofka.UC.create;
 
-import ec.com.sofka.Account;
 import ec.com.sofka.Branch;
 import ec.com.sofka.gateway.BranchRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,11 +8,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest(classes = CreateBranchUseCaseTest.class)

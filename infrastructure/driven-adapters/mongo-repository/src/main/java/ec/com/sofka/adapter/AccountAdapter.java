@@ -4,7 +4,8 @@ import ec.com.sofka.Account;
 import ec.com.sofka.data.AccountDocument;
 import ec.com.sofka.data.CustomerDocument;
 import ec.com.sofka.gateway.AccountRepository;
-import ec.com.sofka.mapper.*;
+import ec.com.sofka.mapper.DocumentToModelMapper;
+import ec.com.sofka.mapper.ModelToDocumentMapper;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -45,7 +46,7 @@ public class AccountAdapter implements AccountRepository {
         return customer_id.flatMapMany(customerId -> {
             Query query = new Query(Criteria.where("_id").is(customerId));
             return reactiveMongoTemplate.findOne(query, AccountDocument.class)
-                    .flatMap(accountDocument ->  DocumentToModelMapper
+                    .flatMap(accountDocument -> DocumentToModelMapper
                             .toAccount.apply(Mono.just(accountDocument)));
         });
     }

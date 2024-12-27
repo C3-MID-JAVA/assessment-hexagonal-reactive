@@ -17,7 +17,8 @@ public class Card {
         this.id = id;
     }
 
-    public Card() {}
+    public Card() {
+    }
 
     public String getCardNumber() {
         return cardNumber;

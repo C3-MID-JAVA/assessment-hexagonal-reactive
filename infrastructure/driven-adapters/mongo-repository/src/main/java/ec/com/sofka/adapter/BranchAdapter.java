@@ -38,9 +38,9 @@ public class BranchAdapter implements BranchRepository {
         return id.flatMap(branchId ->
                 reactiveMongoTemplate
                         .exists(Query
-                                .query(Criteria
-                                        .where("_id")
-                                        .is(branchId)),
+                                        .query(Criteria
+                                                .where("_id")
+                                                .is(branchId)),
                                 BranchDocument.class));
     }
 
@@ -49,9 +49,9 @@ public class BranchAdapter implements BranchRepository {
         return name.flatMap(branchName ->
                         reactiveMongoTemplate
                                 .findOne(Query
-                                        .query(Criteria
-                                                .where("name")
-                                                .is(branchName)),
+                                                .query(Criteria
+                                                        .where("name")
+                                                        .is(branchName)),
                                         BranchDocument.class))
                 .flatMap(branchDocument -> DocumentToModelMapper.toBranch.apply(Mono.just(branchDocument)));
     }

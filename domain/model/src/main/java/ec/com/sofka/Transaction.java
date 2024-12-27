@@ -24,7 +24,8 @@ public class Transaction {
         this.type = type;
     }
 
-    public Transaction() {}
+    public Transaction() {
+    }
 
     public BigDecimal getAmount() {
         return amount;

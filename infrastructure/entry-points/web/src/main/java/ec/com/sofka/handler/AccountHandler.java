@@ -7,7 +7,6 @@ import ec.com.sofka.UC.get.account.GetAccountsByCustomerIdUseCase;
 import ec.com.sofka.UC.get.account.GetAllAccountsUseCase;
 import ec.com.sofka.UC.update.UpdateAccountUseCase;
 import ec.com.sofka.customException.AlreadyExistsException;
-import ec.com.sofka.customException.CreationException;
 import ec.com.sofka.customException.NotFoundException;
 import ec.com.sofka.data.request.AccountRequestDTO;
 import ec.com.sofka.data.request.CustomerRequestDTO;

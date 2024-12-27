@@ -3,7 +3,6 @@ package ec.com.sofka.router;
 import ec.com.sofka.data.request.AccountRequestDTO;
 import ec.com.sofka.data.request.BranchRequestDTO;
 import ec.com.sofka.data.request.TransactionRequestDTO;
-import ec.com.sofka.data.response.CustomerResponseDTO;
 import ec.com.sofka.data.response.TransactionResponseDTO;
 import ec.com.sofka.handler.TransactionHandler;
 import io.swagger.v3.oas.annotations.Operation;

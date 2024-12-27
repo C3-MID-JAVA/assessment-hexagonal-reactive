@@ -1,4 +1,5 @@
 # assessment-hexagonal-reactive
+
 Entrega de assessment #7
 
 TODO: Viernes 27:

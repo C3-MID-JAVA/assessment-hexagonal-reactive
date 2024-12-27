@@ -1,7 +1,5 @@
 package ec.com.sofka.gateway;
 
-import ec.com.sofka.Account;
-import ec.com.sofka.Branch;
 import ec.com.sofka.Transaction;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

@@ -1,9 +1,7 @@
 package ec.com.sofka.adapter;
 
 import ec.com.sofka.Customer;
-import ec.com.sofka.data.CardDocument;
 import ec.com.sofka.data.CustomerDocument;
-import ec.com.sofka.data.TransactionDocument;
 import ec.com.sofka.gateway.CustomerRepository;
 import ec.com.sofka.mapper.DocumentToModelMapper;
 import ec.com.sofka.mapper.ModelToDocumentMapper;

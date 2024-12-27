@@ -1,10 +1,6 @@
 package ec.com.sofka.adapter;
 
-import ec.com.sofka.Account;
-import ec.com.sofka.Branch;
 import ec.com.sofka.Transaction;
-import ec.com.sofka.data.AccountDocument;
-import ec.com.sofka.data.CardDocument;
 import ec.com.sofka.data.TransactionDocument;
 import ec.com.sofka.gateway.TransactionRepository;
 import ec.com.sofka.mapper.DocumentToModelMapper;
@@ -50,7 +46,7 @@ public class TransactionAdapter implements TransactionRepository {
         return id.flatMapMany(branchId -> {
             Query query = new Query(Criteria.where("destinationAccount").is(branchId));
             return reactiveMongoTemplate.findOne(query, TransactionDocument.class)
-                    .flatMap(transactionDocument ->  DocumentToModelMapper
+                    .flatMap(transactionDocument -> DocumentToModelMapper
                             .toTransaction.apply(Mono.just(transactionDocument)));
         });
     }
@@ -60,7 +56,7 @@ public class TransactionAdapter implements TransactionRepository {
         return id.flatMapMany(branchId -> {
             Query query = new Query(Criteria.where("sourceAccount").is(branchId));
             return reactiveMongoTemplate.findOne(query, TransactionDocument.class)
-                    .flatMap(transactionDocument ->  DocumentToModelMapper
+                    .flatMap(transactionDocument -> DocumentToModelMapper
                             .toTransaction.apply(Mono.just(transactionDocument)));
         });
     }
@@ -70,7 +66,7 @@ public class TransactionAdapter implements TransactionRepository {
         return id.flatMapMany(branchId -> {
             Query query = new Query(Criteria.where("branch").is(branchId));
             return reactiveMongoTemplate.findOne(query, TransactionDocument.class)
-                    .flatMap(transactionDocument ->  DocumentToModelMapper
+                    .flatMap(transactionDocument -> DocumentToModelMapper
                             .toTransaction.apply(Mono.just(transactionDocument)));
         });
     }

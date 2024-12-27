@@ -21,7 +21,8 @@ public class Customer {
         this.phone = phone;
     }
 
-    public Customer() {}
+    public Customer() {
+    }
 
     public List<Account> getAccounts() {
         return accounts;

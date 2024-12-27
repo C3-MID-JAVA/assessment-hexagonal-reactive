@@ -13,7 +13,8 @@ public class Branch {
         this.phone = phone;
     }
 
-    public Branch() {}
+    public Branch() {
+    }
 
     public String getAddress() {
         return address;

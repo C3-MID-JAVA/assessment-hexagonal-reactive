@@ -1,9 +1,7 @@
 package ec.com.sofka.UC.create;
 
 import ec.com.sofka.Account;
-import ec.com.sofka.Card;
 import ec.com.sofka.Customer;
-import ec.com.sofka.gateway.CardRepository;
 import ec.com.sofka.gateway.CustomerRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,11 +9,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import java.time.LocalDateTime;
 import java.util.Collections;
 
 import static org.mockito.Mockito.*;

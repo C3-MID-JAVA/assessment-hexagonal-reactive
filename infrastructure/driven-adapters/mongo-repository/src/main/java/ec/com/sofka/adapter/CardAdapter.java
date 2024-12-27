@@ -1,7 +1,6 @@
 package ec.com.sofka.adapter;
 
 import ec.com.sofka.Card;
-import ec.com.sofka.data.BranchDocument;
 import ec.com.sofka.data.CardDocument;
 import ec.com.sofka.gateway.CardRepository;
 import ec.com.sofka.mapper.DocumentToModelMapper;

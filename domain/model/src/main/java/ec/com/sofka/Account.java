@@ -21,7 +21,8 @@ public class Account {
         this.transactions = transactions;
     }
 
-    public Account() {}
+    public Account() {
+    }
 
     public String getAccountNumber() {
         return accountNumber;
