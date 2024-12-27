@@ -5,6 +5,8 @@ import ec.com.sofka.Transaction;
 import ec.com.sofka.data.TransactionInDTO;
 import ec.com.sofka.data.TransactionOutDTO;
 
+import java.time.LocalDate;
+
 public class TransactionMapper {
 
     public static Transaction toEntity(TransactionInDTO transactionInDTO) {
@@ -29,8 +31,8 @@ public class TransactionMapper {
         transactionOutDTO.setId(transaction.getId());
         transactionOutDTO.setDescription(transaction.getDescription());
         transactionOutDTO.setAmount(transaction.getAmount());
-        transactionOutDTO.setTransactionType(transaction.getTransactionType());
-        transactionOutDTO.setDate(transaction.getDate());
+        transactionOutDTO.setTransactionType("");
+        transactionOutDTO.setDate(LocalDate.now());
         transactionOutDTO.setAccountId(transaction.getAccountId());
 
         return transactionOutDTO;

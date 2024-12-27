@@ -82,20 +82,7 @@ public class AccountRouter {
                 .build();
     }
 
-    @Operation(
-            summary = "Crear una nueva cuenta",
-            description = "Crea una cuenta a partir de los datos proporcionados en el cuerpo de la solicitud.",
-            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                    description = "Información de la cuenta",
-                    required = true,
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = AccountInDTO.class))
-            ),
-            responses = {
-                    @ApiResponse(responseCode = "201", description = "Cuenta creada exitosamente",
-                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = AccountOutDTO.class))),
-                    @ApiResponse(responseCode = "400", description = "Solicitud inválida")
-            }
-    )
+
     public Mono<ServerResponse> saveAccount(ServerRequest request) {
         return request.bodyToMono(AccountInDTO.class)
                 .flatMap(accountHandler::saveAccount)
