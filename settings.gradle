@@ -9,8 +9,17 @@ findProject(':model').projectDir = file('./domain/model')
 include ':usecases'
 findProject(':usecases').projectDir = file('./domain/usecases')
 
+include ':strategy'
+findProject(':strategy').projectDir = file('./domain/strategy')
+
+include ':exception'
+findProject(':exception').projectDir = file('./domain/exception')
+
 include ':mongo-repository'
 findProject(':mongo-repository').projectDir = file('./infrastructure/driven-adapters/mongo-repository')
 
 include ':web'
 findProject(':web').projectDir = file('./infrastructure/entry-points/web')
+
+include ':exceptions'
+findProject(':exceptions').projectDir = file('./infrastructure/exceptions')

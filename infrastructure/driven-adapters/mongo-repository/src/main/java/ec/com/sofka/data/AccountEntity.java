@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.math.BigDecimal;
 
-@Document(collection = "bank_account")
+@Document(collection = "account")
 public class AccountEntity {
     @Id
     private String id;
@@ -21,7 +21,8 @@ public class AccountEntity {
     private BigDecimal balance;
 
 
-    public AccountEntity(BigDecimal balance, String owner, String accountNumber) {
+    public AccountEntity(String id, BigDecimal balance, String owner, String accountNumber) {
+        this.id = id;
         this.balance = balance;
         this.owner = owner;
         this.accountNumber = accountNumber;
