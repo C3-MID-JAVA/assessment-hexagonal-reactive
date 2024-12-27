@@ -1,8 +1,6 @@
-package ec.com.sofka.restful;
+package ec.com.sofka.rest;
 
-import ec.com.sofka.data.CustomerInDTO;
 import ec.com.sofka.data.TransactionInDTO;
-import ec.com.sofka.handler.CustomerHandler;
 import ec.com.sofka.handler.TransactionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,7 +34,7 @@ public class TransactionRouter {
                 .build();
     }
 
-    private Mono<ServerResponse> makeBranchDeposit(ServerRequest request) {
+    public Mono<ServerResponse> makeBranchDeposit(ServerRequest request) {
         return request.bodyToMono(TransactionInDTO.class)
                 .flatMap(transactionHandler::makeBranchDeposit)
                 .flatMap(transactionOutDTO -> ServerResponse.status(HttpStatus.CREATED)
@@ -44,7 +42,7 @@ public class TransactionRouter {
                         .bodyValue(transactionOutDTO));
     }
 
-    private Mono<ServerResponse> makeATMDeposit(ServerRequest request) {
+    public Mono<ServerResponse> makeATMDeposit(ServerRequest request) {
         return request.bodyToMono(TransactionInDTO.class)
                 .flatMap(transactionHandler::makeATMDeposit)
                 .flatMap(transactionOutDTO -> ServerResponse.status(HttpStatus.CREATED)
@@ -52,7 +50,7 @@ public class TransactionRouter {
                         .bodyValue(transactionOutDTO));
     }
 
-    private Mono<ServerResponse> makeDepositToAnotherAccount(ServerRequest request) {
+    public Mono<ServerResponse> makeDepositToAnotherAccount(ServerRequest request) {
         return request.bodyToMono(TransactionInDTO.class)
                 .flatMap(transactionHandler::makeDepositToAnotherAccount)
                 .flatMap(transactionOutDTO -> ServerResponse.status(HttpStatus.CREATED)
@@ -60,7 +58,7 @@ public class TransactionRouter {
                         .bodyValue(transactionOutDTO));
     }
 
-    private Mono<ServerResponse> makePhysicalPurchase(ServerRequest request) {
+    public Mono<ServerResponse> makePhysicalPurchase(ServerRequest request) {
         return request.bodyToMono(TransactionInDTO.class)
                 .flatMap(transactionHandler::makePhysicalPurchase)
                 .flatMap(transactionOutDTO -> ServerResponse.status(HttpStatus.CREATED)
@@ -68,7 +66,7 @@ public class TransactionRouter {
                         .bodyValue(transactionOutDTO));
     }
 
-    private Mono<ServerResponse> makeOnlinePurchase(ServerRequest request) {
+    public Mono<ServerResponse> makeOnlinePurchase(ServerRequest request) {
         return request.bodyToMono(TransactionInDTO.class)
                 .flatMap(transactionHandler::makeOnlinePurchase)
                 .flatMap(transactionOutDTO -> ServerResponse.status(HttpStatus.CREATED)
@@ -76,7 +74,7 @@ public class TransactionRouter {
                         .bodyValue(transactionOutDTO));
     }
 
-    private Mono<ServerResponse> makeATMWithdrawal(ServerRequest request) {
+    public Mono<ServerResponse> makeATMWithdrawal(ServerRequest request) {
         return request.bodyToMono(TransactionInDTO.class)
                 .flatMap(transactionHandler::makeATMWithdrawal)
                 .flatMap(transactionOutDTO -> ServerResponse.status(HttpStatus.CREATED)

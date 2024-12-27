@@ -4,8 +4,7 @@ import ec.com.sofka.Account;
 import ec.com.sofka.document.AccountEnti;
 import ec.com.sofka.gateway.AccountRepositoryGateway;
 import ec.com.sofka.mapper.AccountRepoMapper;
-import ec.com.sofka.repository.AccountRepository;
-import ec.com.sofka.repository.ClientRepository;
+import ec.com.sofka.repository.IAccountRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -13,9 +12,9 @@ import reactor.core.publisher.Mono;
 @Repository
 public class AccountAdapter implements AccountRepositoryGateway {
 
-    private final AccountRepository accountRepository;
+    private final IAccountRepository accountRepository;
 
-    public AccountAdapter(AccountRepository accountRepository) {
+    public AccountAdapter(IAccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 

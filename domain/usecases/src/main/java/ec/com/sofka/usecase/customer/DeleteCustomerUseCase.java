@@ -11,7 +11,10 @@ public class DeleteCustomerUseCase {
         this.customerRepositoryGateway = customerRepositoryGateway;
     }
 
-    public Mono<Void> apply(String id){
+    public Mono<Void> apply(String id) {
+        if (id == null) {
+            return Mono.error(new IllegalArgumentException("Id must not be null"));
+        }
         return customerRepositoryGateway.deleteById(id);
     }
 }

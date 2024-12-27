@@ -1,7 +1,6 @@
-package ec.com.sofka.restful;
+package ec.com.sofka.rest;
 
 import ec.com.sofka.data.CustomerInDTO;
-import ec.com.sofka.gateway.CustomerRepositoryGateway;
 import ec.com.sofka.handler.CustomerHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,7 +40,7 @@ public class CustomerRouter {
                 .build();
     }
 
-    private Mono<ServerResponse> saveCustomer(ServerRequest request) {
+    public Mono<ServerResponse> saveCustomer(ServerRequest request) {
         return request.bodyToMono(CustomerInDTO.class)
                 .flatMap(customerHandler::saveCustomer)
                 .flatMap(customerOutDTO -> ServerResponse.status(HttpStatus.CREATED)
@@ -49,7 +48,7 @@ public class CustomerRouter {
                         .bodyValue(customerOutDTO));
     }
 
-    private Mono<ServerResponse> getCustomerById(ServerRequest request) {
+    public Mono<ServerResponse> getCustomerById(ServerRequest request) {
         String id = request.pathVariable("id");
         return customerHandler.findCustomerById(id)
                 .flatMap(customerOutDTO -> ServerResponse.ok()
@@ -58,7 +57,7 @@ public class CustomerRouter {
                 .switchIfEmpty(ServerResponse.notFound().build());
     }
 
-    private Mono<ServerResponse> getAllCustomers(ServerRequest request) {
+    public Mono<ServerResponse> getAllCustomers(ServerRequest request) {
         return customerHandler.findAllCustomers()
                 .collectList()
                 .flatMap(customers -> ServerResponse.ok()
@@ -66,7 +65,7 @@ public class CustomerRouter {
                         .bodyValue(customers));
     }
 
-    private Mono<ServerResponse> deleteCustomer(ServerRequest request) {
+    public Mono<ServerResponse> deleteCustomer(ServerRequest request) {
         String id = request.pathVariable("id");
         return customerHandler.deleteCustomerById(id)
                 .then(ServerResponse.noContent().build());
