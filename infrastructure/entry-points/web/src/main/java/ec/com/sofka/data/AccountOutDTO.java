@@ -1,26 +1,23 @@
-package ec.com.sofka;
-
+package ec.com.sofka.data;
 
 import java.math.BigDecimal;
 
-public class Account {
+public class AccountOutDTO {
+
     private String id;
-    private String AccountNumber;
+    private String accountNumber;
     private BigDecimal balance;
     private String custumerId;
-    private String cardId;
 
-    public Account() {
+    public AccountOutDTO() {
     }
 
-    public Account(String id, String accountNumber, BigDecimal balance, String custumerId, String cardId) {
+    public AccountOutDTO(String id, String accountNumber, BigDecimal balance, String custumerId, String idFass) {
         this.id = id;
-        AccountNumber = accountNumber;
+        this.accountNumber = accountNumber;
         this.balance = balance;
         this.custumerId = custumerId;
-        this.cardId = cardId;
     }
-
 
     public String getId() {
         return id;
@@ -31,11 +28,11 @@ public class Account {
     }
 
     public String getAccountNumber() {
-        return AccountNumber;
+        return accountNumber;
     }
 
     public void setAccountNumber(String accountNumber) {
-        AccountNumber = accountNumber;
+        this.accountNumber = accountNumber;
     }
 
     public BigDecimal getBalance() {
@@ -54,11 +51,5 @@ public class Account {
         this.custumerId = custumerId;
     }
 
-    public String getCardId() {
-        return cardId;
-    }
 
-    public void setCardId(String cardId) {
-        this.cardId = cardId;
-    }
 }

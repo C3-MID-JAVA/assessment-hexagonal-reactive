@@ -1,41 +1,41 @@
-package ec.com.sofka;
+package ec.com.sofka.data;
 
+import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 
-public class Account {
-    private String id;
-    private String AccountNumber;
+public class AccountInDTO {
+
+
+    @NotBlank(message = "El número de cuenta no puede estar vacío.")
+    @Size(min = 10, max = 20, message = "El número de cuenta debe tener entre 10 y 20 caracteres.")
+    private String accountNumber;
+
+    @NotNull(message = "El balance no puede ser nulo.")
+    @DecimalMin(value = "0.0", inclusive = true, message = "El balance no puede ser negativo.")
     private BigDecimal balance;
+
+    @NotBlank(message = "El ID del cliente no puede estar vacío.")
     private String custumerId;
+
     private String cardId;
 
-    public Account() {
+    public AccountInDTO() {
     }
 
-    public Account(String id, String accountNumber, BigDecimal balance, String custumerId, String cardId) {
-        this.id = id;
-        AccountNumber = accountNumber;
+    public AccountInDTO(String accountNumber, BigDecimal balance, String custumerId, String cardId) {
+        this.accountNumber = accountNumber;
         this.balance = balance;
         this.custumerId = custumerId;
         this.cardId = cardId;
     }
 
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getAccountNumber() {
-        return AccountNumber;
+        return accountNumber;
     }
 
     public void setAccountNumber(String accountNumber) {
-        AccountNumber = accountNumber;
+        this.accountNumber = accountNumber;
     }
 
     public BigDecimal getBalance() {

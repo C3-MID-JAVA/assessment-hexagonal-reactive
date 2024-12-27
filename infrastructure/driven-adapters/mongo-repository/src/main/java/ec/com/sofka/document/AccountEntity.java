@@ -1,4 +1,4 @@
-package ec.com.sofka.data;
+package ec.com.sofka.document;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
