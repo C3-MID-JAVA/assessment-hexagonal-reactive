@@ -31,15 +31,6 @@ public class TransactionResponseDTO {
         this.accountNumber = accountNumber;
     }
 
-    public TransactionResponseDTO(String id, String accountNumber, TransactionType transactionType, BigDecimal amount, BigDecimal transactionCost, BigDecimal newBalance, LocalDateTime date) {
-        this.id = id;
-        this.accountNumber = accountNumber;
-        this.transactionType = transactionType;
-        this.amount = amount;
-        this.transactionCost = transactionCost;
-        this.newBalance = newBalance;
-        this.date = date;
-    }
 
     public String getId() {
         return id;
