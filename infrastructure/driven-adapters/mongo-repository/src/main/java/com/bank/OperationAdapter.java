@@ -19,17 +19,17 @@ public class OperationAdapter implements IOperationRepository {
 
     @Override
     public Flux<Operation> findAllOperations() {
-        return repository.findAllOperations().map(OperationEntityMapper::toOperation);
+        return repository.findAll().map(OperationEntityMapper::toOperation);
     }
 
     @Override
     public Mono<Operation> findOperationById(String id) {
-        return repository.findOperationById(id).map(OperationEntityMapper::toOperation);
+        return repository.findById(id).map(OperationEntityMapper::toOperation);
     }
 
     @Override
     public Mono<Operation> createOperation(Operation operation) {
         OperationEntity opEntity = OperationEntityMapper.toOperationEntity(operation);
-        return repository.createOperation(opEntity).map(OperationEntityMapper::toOperation);
+        return repository.insert(opEntity).map(OperationEntityMapper::toOperation);
     }
 }

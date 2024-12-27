@@ -19,17 +19,17 @@ public class AccountAdapter implements IAccountRepository {
 
     @Override
     public Flux<Account> findAllAccounts() {
-        return repository.findAllAccounts().map(AccountEntityMapper::toAccount);
+        return repository.findAll().map(AccountEntityMapper::toAccount);
     }
 
     @Override
     public Mono<Account> findAccountById(String id) {
-        return repository.findAccountById(id).map(AccountEntityMapper::toAccount);
+        return repository.findById(id).map(AccountEntityMapper::toAccount);
     }
 
     @Override
     public Mono<Account> createAccount(Account account) {
         AccountEntity accEntity = AccountEntityMapper.toAccountEntity(account);
-        return repository.createAccount(accEntity).map(AccountEntityMapper::toAccount);
+        return repository.insert(accEntity).map(AccountEntityMapper::toAccount);
     }
 }
