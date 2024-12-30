@@ -1,11 +1,11 @@
 package ec.com.sofka.mapper;
 
 import ec.com.sofka.Account;
-import ec.com.sofka.document.AccountEnti;
+import ec.com.sofka.document.AccountEntity;
 
 public class AccountRepoMapper {
 
-    public static Account toDomain(AccountEnti entity) {
+    public static Account toDomain(AccountEntity entity) {
         if (entity == null) {
             return null;
         }
@@ -19,12 +19,12 @@ public class AccountRepoMapper {
         return account;
     }
 
-    public static AccountEnti toEntity(Account domain) {
+    public static AccountEntity toEntity(Account domain) {
         if (domain == null) {
             return null;
         }
 
-        AccountEnti entity = new AccountEnti();
+        AccountEntity entity = new AccountEntity();
         entity.setId(domain.getId());
         entity.setAccountNumber(domain.getAccountNumber());
         entity.setBalance(domain.getBalance());

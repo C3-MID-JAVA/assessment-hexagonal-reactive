@@ -1,9 +1,10 @@
 package ec.com.sofka.repository;
 
-import ec.com.sofka.document.TransactionEntity;
+import ec.com.sofka.document.ClientEntity;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TransactionRepository extends ReactiveMongoRepository<TransactionEntity, String> {
+public interface IClientRepository extends ReactiveMongoRepository<ClientEntity, String> {
+
 }

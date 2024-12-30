@@ -4,16 +4,16 @@ import ec.com.sofka.Transaction;
 import ec.com.sofka.document.TransactionEntity;
 import ec.com.sofka.gateway.TransactionRepositoryGateway;
 import ec.com.sofka.mapper.TransactionRepoMapper;
-import ec.com.sofka.repository.TransactionRepository;
+import ec.com.sofka.repository.ITransactionRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
 @Repository
 public class TransactionAdapter implements TransactionRepositoryGateway {
 
-    private final TransactionRepository transactionRepository;
+    private final ITransactionRepository transactionRepository;
 
-    public TransactionAdapter(TransactionRepository transactionRepository) {
+    public TransactionAdapter(ITransactionRepository transactionRepository) {
         this.transactionRepository = transactionRepository;
     }
 

@@ -17,7 +17,7 @@ import java.time.LocalDate;
 public class ClientRepositoryTest {
 
     @Autowired
-    private ClientRepository clientRepository;
+    private IClientRepository clientRepository;
 
     @Test
     public void testSaveAndFindById() {

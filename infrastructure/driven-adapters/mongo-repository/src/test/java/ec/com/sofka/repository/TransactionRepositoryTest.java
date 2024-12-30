@@ -18,7 +18,7 @@ import java.time.LocalDate;
 public class TransactionRepositoryTest {
 
     @Autowired
-    private TransactionRepository transactionRepository;
+    private ITransactionRepository transactionRepository;
 
     @Test
     public void testSaveAndFindById() {

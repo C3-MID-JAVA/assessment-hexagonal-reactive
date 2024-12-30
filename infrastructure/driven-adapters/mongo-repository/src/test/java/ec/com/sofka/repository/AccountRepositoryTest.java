@@ -1,9 +1,8 @@
 package ec.com.sofka.repository;
 
-import ec.com.sofka.document.AccountEnti;
+import ec.com.sofka.document.AccountEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.data.mongo.AutoConfigureDataMongo;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -27,13 +26,13 @@ public class AccountRepositoryTest {
 
     @Test
     public void testSaveAndFindById() {
-        AccountEnti account = new AccountEnti();
+        AccountEntity account = new AccountEntity();
         account.setAccountNumber("123456");
         account.setBalance(new BigDecimal(500.0));
         account.setCustumerId("CUST001");
         account.setCardId("CARD001");
 
-        Mono<AccountEnti> saveMono = accountRepository.save(account);
+        Mono<AccountEntity> saveMono = accountRepository.save(account);
 
         StepVerifier.create(saveMono)
                 .assertNext(savedAccount -> {
@@ -42,7 +41,7 @@ public class AccountRepositoryTest {
                 })
                 .verifyComplete();
 
-        Mono<AccountEnti> findMono = accountRepository.findById(account.getId());
+        Mono<AccountEntity> findMono = accountRepository.findById(account.getId());
 
         StepVerifier.create(findMono)
                 .assertNext(foundAccount -> {
@@ -56,7 +55,7 @@ public class AccountRepositoryTest {
 
     @Test
     public void testDelete() {
-        AccountEnti account = new AccountEnti();
+        AccountEntity account = new AccountEntity();
         account.setAccountNumber("123456");
         account.setBalance(new BigDecimal(500.0));
         account.setCustumerId("CUST001");

@@ -2,9 +2,11 @@ dependencies {
 
     implementation project (':usecases')
     implementation project (':mongo-repository')
+    implementation project (':rabbit-info-bus')
     implementation project(':web')
 
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.7.0'
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
 }

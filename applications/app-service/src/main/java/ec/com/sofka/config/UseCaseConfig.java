@@ -11,6 +11,4 @@ includeFilters = {
         @ComponentScan.Filter(type= FilterType.REGEX, pattern = "^.+UseCase$")
 })
 public class UseCaseConfig {
-
-
 }

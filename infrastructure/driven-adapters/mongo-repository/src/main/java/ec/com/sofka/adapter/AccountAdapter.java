@@ -1,7 +1,7 @@
 package ec.com.sofka.adapter;
 
 import ec.com.sofka.Account;
-import ec.com.sofka.document.AccountEnti;
+import ec.com.sofka.document.AccountEntity;
 import ec.com.sofka.gateway.AccountRepositoryGateway;
 import ec.com.sofka.mapper.AccountRepoMapper;
 import ec.com.sofka.repository.IAccountRepository;
@@ -18,11 +18,9 @@ public class AccountAdapter implements AccountRepositoryGateway {
         this.accountRepository = accountRepository;
     }
 
-
-
     @Override
     public Mono<Account> save(Account account) {
-        AccountEnti entity = AccountRepoMapper.toEntity(account);
+        AccountEntity entity = AccountRepoMapper.toEntity(account);
         return accountRepository.save(entity)
                 .map(AccountRepoMapper::toDomain);
     }

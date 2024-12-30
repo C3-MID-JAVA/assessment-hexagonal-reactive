@@ -4,7 +4,7 @@ import ec.com.sofka.Customer;
 import ec.com.sofka.document.ClientEntity;
 import ec.com.sofka.gateway.CustomerRepositoryGateway;
 import ec.com.sofka.mapper.CustomerRepoMapper;
-import ec.com.sofka.repository.ClientRepository;
+import ec.com.sofka.repository.IClientRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -12,9 +12,9 @@ import reactor.core.publisher.Mono;
 @Repository
 public class ClientAdapter implements CustomerRepositoryGateway {
 
-    private final ClientRepository clientRepository;
+    private final IClientRepository clientRepository;
 
-    public ClientAdapter(ClientRepository clientRepository) {
+    public ClientAdapter(IClientRepository clientRepository) {
         this.clientRepository = clientRepository;
     }
 

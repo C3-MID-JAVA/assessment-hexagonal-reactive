@@ -61,4 +61,15 @@ public class Account {
     public void setCardId(String cardId) {
         this.cardId = cardId;
     }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id='" + id + '\'' +
+                ", AccountNumber='" + AccountNumber + '\'' +
+                ", balance=" + balance +
+                ", custumerId='" + custumerId + '\'' +
+                ", cardId='" + cardId + '\'' +
+                '}';
+    }
 }
