@@ -71,4 +71,13 @@ public class Transaction {
     public void setAccountId(String accountId) {
         this.accountId = accountId;
     }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "description='" + description + '\'' +
+                ", amount=" + amount +
+                ", accountId='" + accountId + '\'' +
+                '}';
+    }
 }

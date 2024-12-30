@@ -24,7 +24,7 @@ public class FindAccountUseCase {
     }
 
     public Flux<Account> findAll() {
-        busMessageGateway.sendMsg("Search all account");
+        busMessageGateway.sendMsg("Searching all account");
         return accountRepositoryGateway.findAll();
     }
 }

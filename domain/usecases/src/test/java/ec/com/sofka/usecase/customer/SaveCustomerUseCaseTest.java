@@ -1,6 +1,7 @@
 package ec.com.sofka.usecase.customer;
 
 import ec.com.sofka.Customer;
+import ec.com.sofka.gateway.CustomerBusMessageGateway;
 import ec.com.sofka.gateway.CustomerRepositoryGateway;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -26,7 +27,8 @@ public class SaveCustomerUseCaseTest {
                 LocalDate.of(1990, 1, 1)
         );
         CustomerRepositoryGateway customerRepositoryGateway = mock(CustomerRepositoryGateway.class);
-        SaveCustomerUseCase saveCustomerUseCase = new SaveCustomerUseCase(customerRepositoryGateway);
+        CustomerBusMessageGateway customerBusMessageGateway = mock(CustomerBusMessageGateway.class);
+        SaveCustomerUseCase saveCustomerUseCase = new SaveCustomerUseCase(customerRepositoryGateway, customerBusMessageGateway);
 
         when(customerRepositoryGateway.save(customer)).thenReturn(Mono.just(customer));
 
@@ -52,7 +54,8 @@ public class SaveCustomerUseCaseTest {
                 LocalDate.of(1990, 1, 1)
         );
         CustomerRepositoryGateway customerRepositoryGateway = mock(CustomerRepositoryGateway.class);
-        SaveCustomerUseCase saveCustomerUseCase = new SaveCustomerUseCase(customerRepositoryGateway);
+        CustomerBusMessageGateway customerBusMessageGateway = mock(CustomerBusMessageGateway.class);
+        SaveCustomerUseCase saveCustomerUseCase = new SaveCustomerUseCase(customerRepositoryGateway, customerBusMessageGateway);
 
         when(customerRepositoryGateway.save(customer)).thenReturn(Mono.error(new RuntimeException("Save failed")));
 

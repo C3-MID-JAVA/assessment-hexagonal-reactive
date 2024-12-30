@@ -1,5 +1,6 @@
 package ec.com.sofka.usecase.customer;
 
+import ec.com.sofka.gateway.CustomerBusMessageGateway;
 import ec.com.sofka.gateway.CustomerRepositoryGateway;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -15,7 +16,8 @@ public class DeleteCustomerUseCaseTest {
     void shouldDeleteCustomerById() {
         String customerId = "12345";
         CustomerRepositoryGateway customerRepositoryGateway = mock(CustomerRepositoryGateway.class);
-        DeleteCustomerUseCase deleteCustomerUseCase = new DeleteCustomerUseCase(customerRepositoryGateway);
+        CustomerBusMessageGateway customerBusMessageGateway = mock(CustomerBusMessageGateway.class);
+        DeleteCustomerUseCase deleteCustomerUseCase = new DeleteCustomerUseCase(customerRepositoryGateway, customerBusMessageGateway);
 
         when(customerRepositoryGateway.deleteById(customerId)).thenReturn(Mono.empty());
 
@@ -30,7 +32,8 @@ public class DeleteCustomerUseCaseTest {
     @Test
     void shouldNotCallDeleteIfIdIsNull() {
         CustomerRepositoryGateway customerRepositoryGateway = mock(CustomerRepositoryGateway.class);
-        DeleteCustomerUseCase deleteCustomerUseCase = new DeleteCustomerUseCase(customerRepositoryGateway);
+        CustomerBusMessageGateway customerBusMessageGateway = mock(CustomerBusMessageGateway.class);
+        DeleteCustomerUseCase deleteCustomerUseCase = new DeleteCustomerUseCase(customerRepositoryGateway, customerBusMessageGateway);
 
         Mono<Void> result = deleteCustomerUseCase.apply(null);
 

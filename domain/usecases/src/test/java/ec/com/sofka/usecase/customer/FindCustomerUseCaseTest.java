@@ -1,6 +1,7 @@
 package ec.com.sofka.usecase.customer;
 
 import ec.com.sofka.Customer;
+import ec.com.sofka.gateway.CustomerBusMessageGateway;
 import ec.com.sofka.gateway.CustomerRepositoryGateway;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -31,7 +32,8 @@ public class FindCustomerUseCaseTest {
                 LocalDate.of(1990, 1, 1)
         );
         CustomerRepositoryGateway customerRepositoryGateway = mock(CustomerRepositoryGateway.class);
-        FindCustomerUseCase findCustomerUseCase = new FindCustomerUseCase(customerRepositoryGateway);
+        CustomerBusMessageGateway customerBusMessageGateway = mock(CustomerBusMessageGateway.class);
+        FindCustomerUseCase findCustomerUseCase = new FindCustomerUseCase(customerRepositoryGateway, customerBusMessageGateway);
 
         when(customerRepositoryGateway.findById(customerId)).thenReturn(Mono.just(expectedCustomer));
 
@@ -48,7 +50,8 @@ public class FindCustomerUseCaseTest {
     void shouldReturnEmptyWhenCustomerNotFoundById() {
         String customerId = "1231213";
         CustomerRepositoryGateway customerRepositoryGateway = mock(CustomerRepositoryGateway.class);
-        FindCustomerUseCase findCustomerUseCase = new FindCustomerUseCase(customerRepositoryGateway);
+        CustomerBusMessageGateway customerBusMessageGateway = mock(CustomerBusMessageGateway.class);
+        FindCustomerUseCase findCustomerUseCase = new FindCustomerUseCase(customerRepositoryGateway, customerBusMessageGateway);
 
         when(customerRepositoryGateway.findById(customerId)).thenReturn(Mono.empty());
 
@@ -67,7 +70,8 @@ public class FindCustomerUseCaseTest {
                 new Customer("124", "ID124", "Jane", "Doe", "jane.doe@example.com", "987-654-3210", "456 Elm St", LocalDate.of(1992, 2, 2))
         );
         CustomerRepositoryGateway customerRepositoryGateway = mock(CustomerRepositoryGateway.class);
-        FindCustomerUseCase findCustomerUseCase = new FindCustomerUseCase(customerRepositoryGateway);
+        CustomerBusMessageGateway customerBusMessageGateway = mock(CustomerBusMessageGateway.class);
+        FindCustomerUseCase findCustomerUseCase = new FindCustomerUseCase(customerRepositoryGateway, customerBusMessageGateway);
 
         when(customerRepositoryGateway.findAll()).thenReturn(Flux.fromIterable(customers));
 
@@ -83,7 +87,8 @@ public class FindCustomerUseCaseTest {
     @Test
     void shouldReturnEmptyWhenNoCustomersFound() {
         CustomerRepositoryGateway customerRepositoryGateway = mock(CustomerRepositoryGateway.class);
-        FindCustomerUseCase findCustomerUseCase = new FindCustomerUseCase(customerRepositoryGateway);
+        CustomerBusMessageGateway customerBusMessageGateway = mock(CustomerBusMessageGateway.class);
+        FindCustomerUseCase findCustomerUseCase = new FindCustomerUseCase(customerRepositoryGateway, customerBusMessageGateway);
 
         when(customerRepositoryGateway.findAll()).thenReturn(Flux.empty());
 
