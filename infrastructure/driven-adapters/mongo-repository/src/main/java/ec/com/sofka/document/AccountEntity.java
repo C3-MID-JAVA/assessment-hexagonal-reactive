@@ -1,19 +1,25 @@
-package ec.com.sofka;
+package ec.com.sofka.document;
 
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
 
-public class Account {
+@Document(collection = "accounts")
+public class AccountEntity {
+
+    @Id
     private String id;
     private String AccountNumber;
     private BigDecimal balance;
     private String custumerId;
     private String cardId;
 
-    public Account() {
+    public AccountEntity() {
     }
 
-    public Account(String id, String accountNumber, BigDecimal balance, String custumerId, String cardId) {
+    public AccountEntity(String id, String accountNumber, BigDecimal balance, String custumerId, String cardId) {
         this.id = id;
         AccountNumber = accountNumber;
         this.balance = balance;
@@ -64,7 +70,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" +
+        return "AccountEnti{" +
                 "id='" + id + '\'' +
                 ", AccountNumber='" + AccountNumber + '\'' +
                 ", balance=" + balance +
