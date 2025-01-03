@@ -1,13 +1,15 @@
-package org.example.financespro.dto.response;
+package ec.com.sofka.dto.response;
 
-/** DTO for account responses. */
-public final class AccountResponseDto {
+/**
+ * DTO for account responses.
+ */
+public final class AccountResponseDTO {
 
   private final String id;
   private final String accountNumber;
   private final Double balance;
 
-  public AccountResponseDto(String id, String accountNumber, Double balance) {
+  public AccountResponseDTO(String id, String accountNumber, Double balance) {
     this.id = id;
     this.accountNumber = accountNumber;
     this.balance = balance;
