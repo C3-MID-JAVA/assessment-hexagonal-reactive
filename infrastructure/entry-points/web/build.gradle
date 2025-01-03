@@ -1,0 +1,26 @@
+dependencies {
+    implementation project(':model')
+    implementation project(':usecases')
+
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '3.1.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.2'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.11.4'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+    implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.7.0'
+    implementation 'org.springdoc:springdoc-openapi-data-rest:1.6.9'
+    implementation 'org.springdoc:springdoc-openapi-webflux-core:1.6.9'
+
+
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
