@@ -1,23 +1,20 @@
-package org.example.financespro.dto.response;
+package ec.com.sofka.dto.response;
 
 import java.math.BigDecimal;
 
-public final class TransactionResponseDto {
+/**
+ * DTO for transaction responses.
+ */
+public final class TransactionResponseDTO {
 
   private final String transactionType;
   private final BigDecimal transactionAmount;
   private final BigDecimal transactionCost;
-  private final BigDecimal remainingBalance;
 
-  public TransactionResponseDto(
-      String transactionType,
-      BigDecimal transactionAmount,
-      BigDecimal transactionCost,
-      BigDecimal remainingBalance) {
+  public TransactionResponseDTO(String transactionType, BigDecimal transactionAmount, BigDecimal transactionCost) {
     this.transactionType = transactionType;
     this.transactionAmount = transactionAmount;
     this.transactionCost = transactionCost;
-    this.remainingBalance = remainingBalance;
   }
 
   public String getTransactionType() {
@@ -32,7 +29,4 @@ public final class TransactionResponseDto {
     return transactionCost;
   }
 
-  public BigDecimal getRemainingBalance() {
-    return remainingBalance;
-  }
 }

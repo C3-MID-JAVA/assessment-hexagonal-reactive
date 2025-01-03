@@ -1,5 +1,8 @@
-package org.example.financespro.model;
+package ec.com.sofka;
 
+/**
+ * Enum representing the transaction types.
+ */
 public enum TRANSACTION_TYPE {
   BRANCH_DEPOSIT,
   ATM_DEPOSIT,
