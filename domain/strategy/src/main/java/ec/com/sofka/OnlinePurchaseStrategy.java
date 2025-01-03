@@ -1,9 +1,10 @@
-package org.example.financespro.strategy;
+package ec.com.sofka;
 
 import java.math.BigDecimal;
-import org.example.financespro.model.TRANSACTION_TYPE;
+import org.springframework.stereotype.Component;
 
-public class OnlinePurchaseStrategy implements TransactionCostStrategy {
+@Component
+public class OnlinePurchaseStrategy implements ITransactionCostStrategy {
 
   @Override
   public BigDecimal calculateCost(BigDecimal amount) {
