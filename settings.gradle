@@ -1,1 +1,15 @@
 rootProject.name = 'FinancesPro'
+
+include ':app-service'
+include ':model'
+include ':usecases'
+include ':strategy'
+include ':mongo-repository'
+include ':web'
+
+project(':app-service').projectDir = file('./application/app-service')
+project(':model').projectDir = file('./domain/model')
+project(':usecases').projectDir = file('./domain/usecases')
+project(':strategy').projectDir = file('./domain/strategy')
+project(':mongo-repository').projectDir = file('./infrastructure/driven-adapters/mongo-repository')
+project(':web').projectDir = file('./infrastructure/entry-points/web')
